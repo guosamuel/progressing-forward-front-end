@@ -1,10 +1,11 @@
 import React from 'react'
-// import { Header } from 'semantic-ui-react'
+import { NavLink } from 'react-router-dom'
 
 const TopHeader = () => (
-  <h1 className="topHeader">
-    Progressing Forward
-  </h1>
+  <div className="topHeader">
+    <h1>Progressing Forward</h1>
+    <NavLink to="/login">Login</NavLink>
+  </div>
 )
 
 export default TopHeader
