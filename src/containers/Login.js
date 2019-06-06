@@ -15,7 +15,17 @@ class Login extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    console.log("SUBMITTED")
+    // console.log("SUBMITTED")
+    fetch('http://localhost:3000/api/v1/auth', {
+      method: 'POST',
+      headers:{
+        "Content-Type": 'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify(this.state)
+    })
+    .then(resp => resp.json())
+    .then(console.log)
   }
   render(){
     // console.log(this.state)
