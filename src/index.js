@@ -5,7 +5,8 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
-import userReducer from './reducers/user'
+import userReducer from './reducers/users'
+import 'semantic-ui-css/semantic.min.css'
 
 let store = createStore(userReducer)
 

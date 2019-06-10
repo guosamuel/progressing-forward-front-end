@@ -16,3 +16,22 @@ code {
   background-color: #ADD8E6;
   text-indent: 2em
 }
+
+#ToDoProjectsContainer {
+  border: dashed;
+  background-color: #FF1212
+}
+
+#InProgressProjectsContainer {
+  border: dashed;
+  background-color: #1A12FF
+}
+
+#CompletedProjectsContainer {
+  border: dashed;
+  background-color: #22FF12
+}
+
+.column {
+  top: 20px
+}

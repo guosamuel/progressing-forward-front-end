@@ -1,17 +1,27 @@
-import React from 'react';
+import React, { Component } from 'react';
 import TopHeader from './containers/TopHeader'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
+// import { BrowserRouter as Router, Route } from 'react-router-dom'
 import Login from "./containers/Login"
+import { connect } from "react-redux"
+import ProgressCharts from './containers/ProgressCharts'
 
-function App() {
-  return (
-    <Router>
+class App extends Component {
+  render() {
+    console.log("CURRENT USER", this.props.current_user)
+    return (
       <div>
-      <TopHeader />
-      <Route exact path="/login" component={Login} />
+        <TopHeader />
+        { !!this.props.current_user ? <ProgressCharts /> : <Login /> }
       </div>
-    </Router>
-  );
+    );
+  }
 }
 
-export default App;
+const mapStateToProps = state => {
+  console.log("I AM IN THE MAPSTATETOPROPS", state)
+  return {
+    current_user: state.current_user
+  }
+}
+
+export default connect(mapStateToProps)(App);
