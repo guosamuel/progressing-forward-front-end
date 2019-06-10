@@ -5,10 +5,10 @@ import App from './App';
 import * as serviceWorker from './serviceWorker';
 import { Provider } from 'react-redux'
 import { createStore } from 'redux'
-import userReducer from './reducers/users'
+import rootReducer from './reducers/index'
 import 'semantic-ui-css/semantic.min.css'
 
-let store = createStore(userReducer)
+let store = createStore(rootReducer)
 
 ReactDOM.render(
   <Provider store={store}>

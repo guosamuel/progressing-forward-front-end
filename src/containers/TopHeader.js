@@ -12,13 +12,14 @@ class TopHeader extends Component {
   }
 
   render() {
+    console.log("I AM IN THE TOPHEADER CONTAINER", this.props)
     return(
       <div className="topHeader">
         <h1 className="ui header">Progressing Forward</h1>
         { !!this.props.current_user ?
           <div>
             <h2> Welcome {this.props.current_user.first_name} {this.props.current_user.last_name}
-            <button className="ui button" type="Login" onClick={this.handleLogOut}>Log Out</button>
+            <button className="ui button" type="Logout" onClick={this.handleLogOut}>Log Out</button>
             </h2>
           </div>
           : null
@@ -30,7 +31,7 @@ class TopHeader extends Component {
 
 const mapStateToProps = state => {
   return {
-    current_user: state.current_user
+    current_user: state.usersReducer.current_user
   }
 }
 
