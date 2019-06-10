@@ -53,7 +53,7 @@ class Login extends Component {
 
   render(){
     // console.log("THE PROPS IN LOGIN PAGE ARE", this.props)
-    console.log(this.state)
+    // console.log(this.state)
     return(
       <div>
           { this.state.invalid ? <div className="ui red message">Invalid Username or Password</div> : null}

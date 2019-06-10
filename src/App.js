@@ -20,7 +20,7 @@ class App extends Component {
 const mapStateToProps = state => {
   console.log("I AM IN THE MAPSTATETOPROPS", state)
   return {
-    current_user: state.current_user
+    current_user: state.usersReducer.current_user
   }
 }
 

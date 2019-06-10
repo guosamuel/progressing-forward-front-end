@@ -1,11 +1,27 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import Project from '../components/Project'
 
-const InProgressProjectsContainer = () => {
-  return (
-    <div>
-      <p>IN-PROGRESS LIST</p>
-    </div>
-  )
+class InProgressProjectsContainer extends Component {
+
+  render() {
+    // console.log("I AM IN THE TO DO PROJECTS CONTAINER", this.props)
+    const inProgressProjects = this.props.allProjects.filter( project => project.percentage > 0 && project.percentage < 100)
+    // console.log("TO DO PROJECTS", toDoProjects)
+    const renderInProgressProjects = inProgressProjects.map( project => <Project project={project} key={project.id}/>)
+    return (
+      <div>
+        <h1>IN PROGRESS:</h1>
+        <div>{renderInProgressProjects}</div>
+      </div>
+    )
+  }
 }
 
-export default InProgressProjectsContainer
+const mapStateToProps = state => {
+  return {
+    allProjects: state.projectsReducer.projects
+  }
+}
+
+export default connect(mapStateToProps)(InProgressProjectsContainer)
