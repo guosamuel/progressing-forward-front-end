@@ -8,7 +8,14 @@ import { allProjects } from '../actions/projectActions'
 class ProgressCharts extends Component {
 
   componentDidMount() {
-    fetch('http://localhost:3000/api/v1/projects')
+
+    const token = localStorage.getItem('token')
+
+    fetch('http://localhost:3000/api/v1/projects', {
+      headers: {
+        Authorization: `${token}`
+      }
+    })
       .then(resp => resp.json())
       .then(projects => this.props.allProjects(projects))
   }
