@@ -1,8 +1,17 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import Project from '../components/Project'
+import NewProjectForm from '../components/NewProjectForm'
 
 class ToDoProjectsContainer extends Component {
+
+  state = {
+    formShown: false
+  }
+
+  handleClick = () => {
+    this.setState({formShown: !this.state.formShown})
+  }
 
   render() {
     // console.log("I AM IN THE TO DO PROJECTS CONTAINER", this.props)
@@ -12,6 +21,14 @@ class ToDoProjectsContainer extends Component {
     return (
       <div>
         <h1>TO DO:</h1>
+        <button className="compact ui icon button" onClick={this.handleClick}>
+          {this.state.formShown ? <i className="down chevron icon"></i> : <i className="right chevron icon"></i> }
+          Create New Task
+        </button>
+        <br/>
+        <br/>
+        <div> {this.state.formShown ? <NewProjectForm /> : null} </div>
+        <br />
         <div>{renderToDoProjects}</div>
       </div>
     )
