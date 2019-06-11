@@ -34,7 +34,11 @@ class NewProjectForm extends Component {
       body: JSON.stringify(this.state)
     })
     .then(resp => resp.json())
-    .then(newProject => console.log("I'M IN THE HANDLE EVENT", newProject))
+    .then(newProject => {
+      if (newProject.error) {
+        alert(newProject.error)
+      }
+    })
   }
 
   render() {
