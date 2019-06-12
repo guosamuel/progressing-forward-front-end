@@ -4,6 +4,7 @@ import InProgressProjectsContainer from './InProgressProjectsContainer.js'
 import CompletedProjectsContainer from './CompletedProjectsContainer.js'
 import { connect } from 'react-redux'
 import { allProjects } from '../actions/projectActions'
+import { allTasks } from '../actions/taskActions'
 
 class ProgressCharts extends Component {
 
@@ -18,6 +19,10 @@ class ProgressCharts extends Component {
     })
       .then(resp => resp.json())
       .then(projects => this.props.allProjects(projects))
+
+    fetch('http://localhost:3000/api/v1/tasks')
+      .then(resp => resp.json())
+      .then(tasks => this.props.allTasks(tasks))
   }
 
   render() {
@@ -39,7 +44,8 @@ class ProgressCharts extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    allProjects: (projects) => dispatch(allProjects(projects))
+    allProjects: (projects) => dispatch(allProjects(projects)),
+    allTasks: (tasks) => dispatch(allTasks(tasks))
   }
 }
 export default connect(null, mapDispatchToProps)(ProgressCharts)
