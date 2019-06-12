@@ -6,11 +6,11 @@ import NewProjectForm from '../components/NewProjectForm'
 class ToDoProjectsContainer extends Component {
 
   state = {
-    formShown: false
+    projectFormShown: false
   }
 
   handleClick = () => {
-    this.setState({formShown: !this.state.formShown})
+    this.setState({projectFormShown: !this.state.projectFormShown})
   }
 
   render() {
@@ -23,12 +23,12 @@ class ToDoProjectsContainer extends Component {
       <div>
         <h1>TO DO:</h1>
         <button className="compact ui icon button" onClick={this.handleClick}>
-          {this.state.formShown ? <i className="down chevron icon"></i> : <i className="right chevron icon"></i> }
-          Create New Task
+          {this.state.projectFormShown ? <i className="down chevron icon"></i> : <i className="right chevron icon"></i> }
+          Create New Project
         </button>
         <br/>
         <br/>
-        <div> {this.state.formShown ? <NewProjectForm /> : null} </div>
+        <div> {this.state.projectFormShown ? <NewProjectForm /> : null} </div>
         <br />
         <div>{renderToDoProjects}</div>
       </div>
