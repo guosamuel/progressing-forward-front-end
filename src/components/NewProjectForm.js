@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 // import DateForm from './DateForm'
 import { DateInput } from 'semantic-ui-calendar-react'
 import { connect } from 'react-redux'
+import { addProject } from '../actions/projectActions'
 
 class NewProjectForm extends Component {
 
@@ -37,12 +38,19 @@ class NewProjectForm extends Component {
     .then(newProject => {
       if (newProject.error) {
         alert(newProject.error)
+      } else {
+        this.props.addProject(newProject)
       }
     })
+    .then(this.setState({
+      title: "",
+      description: "",
+      date: "",
+    }))
   }
 
   render() {
-    console.log("I AM IN THE NEW PROJECT", this.props)
+    // console.log("I AM IN THE NEW PROJECT", this.props)
     return (
       <form className="ui form" onSubmit={this.handleSubmit}>
         <div className="field">
@@ -91,4 +99,11 @@ const mapStateToProps = state => {
     current_user: state.usersReducer.current_user
   }
 }
-export default connect(mapStateToProps)(NewProjectForm)
+
+const mapDispatchToProps = dispatch => {
+  return {
+    addProject: (newProject) => dispatch(addProject(newProject))
+  }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(NewProjectForm)

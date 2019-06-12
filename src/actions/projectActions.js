@@ -4,3 +4,10 @@ export const allProjects = (projects) => {
     payload: projects
   }
 }
+
+export const addProject = (newProject) => {
+  return {
+    type: "ADDPROJECT",
+    payload: newProject
+  }
+}
