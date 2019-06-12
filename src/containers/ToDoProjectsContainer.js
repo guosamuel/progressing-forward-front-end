@@ -15,6 +15,7 @@ class ToDoProjectsContainer extends Component {
 
   render() {
     // console.log("I AM IN THE TO DO PROJECTS CONTAINER", this.props)
+    // debugger
     const toDoProjects = this.props.allProjects.filter( project => project.percentage === 0)
     // console.log("TO DO PROJECTS", toDoProjects)
     const renderToDoProjects = toDoProjects.map( project => <Project project={project} key={project.id}/>)
