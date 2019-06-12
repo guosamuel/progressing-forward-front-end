@@ -12,7 +12,7 @@ class TopHeader extends Component {
   }
 
   render() {
-    console.log("I AM IN THE TOPHEADER CONTAINER", this.props)
+    // console.log("I AM IN THE TOPHEADER CONTAINER", this.props)
     return(
       <div className="topHeader">
         <h1 className="ui header">Progressing Forward</h1>
