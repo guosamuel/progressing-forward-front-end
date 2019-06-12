@@ -1,20 +1,34 @@
 import React, { Component } from 'react'
-// import DateForm from './DateForm'
 import { DateInput } from 'semantic-ui-calendar-react'
-import { connect } from 'react-redux'
-import { addTask } from '../actions/taskActions'
 
-class NewTaskForm extends Component {
+class EditTaskForm extends Component {
+  constructor(props) {
+    super(props);
 
-  state = {
-    title: "",
-    description: "",
-    date: "",
-    project_id: this.props.projectId
+    this.reformatDateAppearance = (date) => {
+      const year = date.slice(0,4)
+      const month = date.slice(5,7)
+      const day = date.slice(8,10)
+      return `${month}/${day}/${year}`
+    }
+
+    this.state = {
+      title: this.props.task.title,
+      description: this.props.task.description,
+      date: this.reformatDateAppearance(this.props.task.due_date),
+      task_id: this.props.task.id,
+      percentage: this.props.task.percentage
+    }
+
   }
 
   handleChange = (event) => {
-    this.setState({[event.target.name]: event.target.value})
+    if (event.target.name === "percentage") {
+      this.setState({[event.target.name]: parseInt(event.target.value, 10)})
+    }
+    else {
+      this.setState({[event.target.name]: event.target.value})
+    }
   }
 
   handleDateChange = (event, {name, value}) => {
@@ -22,31 +36,6 @@ class NewTaskForm extends Component {
     // console.log("THIS IS THE EVENT", event, "THIS IS THE NAME", name, "THIS IS THE VALUE", value)
     // debugger
     this.setState({[name]: value})
-  }
-
-  handleSubmit = (event) => {
-    event.preventDefault()
-    fetch('http://localhost:3000/api/v1/tasks', {
-      method: "POST",
-      headers: {
-        "Content-Type": 'application/json',
-        Accept: 'application/json'
-      },
-      body: JSON.stringify(this.state)
-    })
-    .then(resp => resp.json())
-    .then(newTask => {
-      if (newTask.error) {
-        alert(newTask.error)
-      } else {
-        this.props.addTask(newTask)
-      }
-    })
-    .then(this.setState({
-      title: "",
-      description: "",
-      date: "",
-    }))
   }
 
   lastDate = () => {
@@ -60,10 +49,50 @@ class NewTaskForm extends Component {
     return maxDate
   }
 
+  handleSubmit = (event) => {
+    event.preventDefault()
+    fetch(`http://localhost:3000/api/v1/tasks/${this.state.task_id}`, {
+      method: "PATCH",
+      headers: {
+        "Content-Type": 'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify(this.state)
+    })
+    .then(resp => resp.json())
+    .then(data => console.log("I AM EDIT ASYNCHRONOUSLY", data))
+    // .then(newTask => {
+    //   if (newTask.error) {
+    //     alert(newTask.error)
+    //   } else {
+    //     this.props.addTask(newTask)
+    //   }
+    // })
+    // .then(this.setState({
+    //   title: "",
+    //   description: "",
+    //   date: "",
+    // }))
+  }
+
   render() {
-    // console.log("I AM IN THE NEW TASK", this.props)
+    console.log("I AM IN THE EDIT TASK FORM", this.state)
     return (
       <form className="ui form" onSubmit={this.handleSubmit}>
+        <div className="field">
+          <label>Update Progress</label>
+            <div className="ui input">
+              <input
+                type="number"
+                min="0"
+                max="100"
+                step="1"
+                onChange={this.handleChange}
+                name="percentage"
+                value={this.state.percentage}
+              />
+            </div>
+        </div>
         <div className="field">
           <label>Title</label>
           <input
@@ -106,10 +135,4 @@ class NewTaskForm extends Component {
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    addTask: (newTask) => dispatch(addTask(newTask))
-  }
-}
-
-export default connect(null, mapDispatchToProps)(NewTaskForm)
+export default EditTaskForm

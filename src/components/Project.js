@@ -22,9 +22,9 @@ class Project extends Component {
   }
 
   render() {
-    console.log("IM IN THE PROJECT COMPONENT", this.props)
+    // console.log("IM IN THE PROJECT COMPONENT", this.props)
     const filteredTasks = this.props.allTasks.filter( task => task.project_id === this.props.project.id)
-    const renderTasks = filteredTasks.map( task => <Task task={task} key={task.id}/> )
+    const renderTasks = filteredTasks.map( task => <Task task={task} key={task.id} projectDueDate={this.props.project.due_date}/> )
 
     return (
       <div className="ui middle celled relaxed aligned divided list">

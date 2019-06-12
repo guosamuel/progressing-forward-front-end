@@ -7,7 +7,7 @@ import ProgressCharts from './containers/ProgressCharts'
 
 class App extends Component {
   render() {
-    console.log("CURRENT USER", this.props.current_user)
+    // console.log("CURRENT USER", this.props.current_user)
     return (
       <div>
         <TopHeader />
@@ -18,7 +18,7 @@ class App extends Component {
 }
 
 const mapStateToProps = state => {
-  console.log("I AM IN THE MAPSTATETOPROPS", state)
+  // console.log("I AM IN THE MAPSTATETOPROPS", state)
   return {
     current_user: state.usersReducer.current_user
   }
