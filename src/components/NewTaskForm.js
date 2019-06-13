@@ -3,6 +3,7 @@ import React, { Component } from 'react'
 import { DateInput } from 'semantic-ui-calendar-react'
 import { connect } from 'react-redux'
 import { addTask } from '../actions/taskActions'
+import { updateProject } from '../actions/projectActions'
 
 class NewTaskForm extends Component {
 
@@ -39,7 +40,8 @@ class NewTaskForm extends Component {
       if (newTask.error) {
         alert(newTask.error)
       } else {
-        this.props.addTask(newTask)
+        this.props.addTask(newTask.new_task)
+        this.props.updateProject(newTask.updated_project)
       }
     })
     .then(this.setState({
@@ -108,7 +110,8 @@ class NewTaskForm extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    addTask: (newTask) => dispatch(addTask(newTask))
+    addTask: (newTask) => dispatch(addTask(newTask)),
+    updateProject: (project) => dispatch(updateProject(project))
   }
 }
 
