@@ -21,6 +21,11 @@ class Project extends Component {
     this.setState({taskFormShown: !this.state.taskFormShown})
   }
 
+  findProjectLead = () => {
+    const projectLead = this.props.allUsers.find( user => user.id === this.props.project.project_lead_id)
+    return `${projectLead.first_name} ${projectLead.last_name}`
+  }
+
   render() {
     // console.log("IM IN THE PROJECT COMPONENT", this.props)
     const filteredTasks = this.props.allTasks.filter( task => task.project_id === this.props.project.id)
@@ -39,7 +44,7 @@ class Project extends Component {
             <br/>
             Description: {this.props.project.description}
             <br/>
-            Point of Contact: {this.props.current_user.first_name} {this.props.current_user.last_name}
+            Project Lead: {this.findProjectLead()}
             <br />
             Project Due Date: {sanitizeDate(this.props.project.due_date)}
           </div>
@@ -69,7 +74,8 @@ class Project extends Component {
 const mapStateToProps = state => {
   return {
     current_user: state.usersReducer.current_user,
-    allTasks: state.tasksReducer.tasks
+    allTasks: state.tasksReducer.tasks,
+    allUsers: state.usersReducer.users
   }
 }
 export default connect(mapStateToProps)(Project)
