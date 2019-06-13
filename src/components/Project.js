@@ -21,15 +21,25 @@ class Project extends Component {
     this.setState({taskFormShown: !this.state.taskFormShown})
   }
 
-  findProjectLead = () => {
-    const projectLead = this.props.allUsers.find( user => user.id === this.props.project.project_lead_id)
-    return `${projectLead.first_name} ${projectLead.last_name}`
-  }
+  // findProjectLead = () => {
+  //   return projectLead
+  // }
 
   render() {
     // console.log("IM IN THE PROJECT COMPONENT", this.props)
     const filteredTasks = this.props.allTasks.filter( task => task.project_id === this.props.project.id)
     const renderTasks = filteredTasks.map( task => <Task task={task} key={task.id} projectDueDate={this.props.project.due_date}/> )
+    const projectLead = this.props.allUsers.find( user => user.id === this.props.project.project_lead_id)
+    const allCollaborators = this.props.project.users.filter( user => user.id !== projectLead.id ).map( collaborator => {
+      return (
+        <div className="item">
+          <i className="right triangle icon"></i>
+          <div className="content">
+            <div className="header">{collaborator.first_name} {collaborator.last_name}</div>
+          </div>
+        </div>
+      )
+    })
 
     return (
       <div className="ui middle celled relaxed aligned divided list">
@@ -44,10 +54,16 @@ class Project extends Component {
             <br/>
             Description: {this.props.project.description}
             <br/>
-            Project Lead: {this.findProjectLead()}
+            Project Lead: {projectLead.first_name} {projectLead.last_name}
             <br />
             Project Due Date: {sanitizeDate(this.props.project.due_date)}
+            <br />
+            Collaborators:
+            <div className="ui list">
+              { allCollaborators }
+            </div>
           </div>
+          <br />
           <div>
             <Progress value={this.props.project.percentage} total='100' progress='percent' indicating />
           </div>
