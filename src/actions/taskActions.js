@@ -11,3 +11,10 @@ export const addTask = (newTask) => {
     payload: newTask
   }
 }
+
+export const editTask = (updatedTask) => {
+  return {
+    type: "EDITTASK",
+    payload: updatedTask
+  }
+}
