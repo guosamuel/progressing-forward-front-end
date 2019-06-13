@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
 import { DateInput } from 'semantic-ui-calendar-react'
+import { connect } from 'react-redux'
+import { editTask } from '../actions/taskActions'
 
 class EditTaskForm extends Component {
   constructor(props) {
@@ -60,19 +62,20 @@ class EditTaskForm extends Component {
       body: JSON.stringify(this.state)
     })
     .then(resp => resp.json())
-    .then(data => console.log("I AM EDIT ASYNCHRONOUSLY", data))
-    // .then(newTask => {
-    //   if (newTask.error) {
-    //     alert(newTask.error)
-    //   } else {
-    //     this.props.addTask(newTask)
-    //   }
-    // })
-    // .then(this.setState({
-    //   title: "",
-    //   description: "",
-    //   date: "",
-    // }))
+    .then(editedTask => {
+      if (editedTask.error) {
+        alert(editedTask.error)
+      } else {
+        alert(editedTask.success);
+        this.props.editTask(editedTask.updated_task);
+        this.setState({
+          title: editedTask.updated_task.title,
+          description: editedTask.updated_task.description,
+          date: editedTask.updated_task.due_date,
+          percentage: editedTask.updated_task.percentage
+        })
+      }
+    })
   }
 
   render() {
@@ -135,4 +138,10 @@ class EditTaskForm extends Component {
   }
 }
 
-export default EditTaskForm
+const mapDispatchToProps = dispatch => {
+  return {
+    editTask: (updatedTask) => dispatch(editTask(updatedTask))
+  }
+}
+
+export default connect(null, mapDispatchToProps)(EditTaskForm)
