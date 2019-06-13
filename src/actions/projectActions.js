@@ -11,3 +11,10 @@ export const addProject = (newProject) => {
     payload: newProject
   }
 }
+
+export const updateProject = (updatedProject) => {
+  return {
+    type: "UPDATEPROJECT",
+    payload: updatedProject
+  }
+}

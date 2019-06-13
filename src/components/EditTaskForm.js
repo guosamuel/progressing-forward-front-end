@@ -2,6 +2,7 @@ import React, { Component } from 'react'
 import { DateInput } from 'semantic-ui-calendar-react'
 import { connect } from 'react-redux'
 import { editTask } from '../actions/taskActions'
+import { updateProject } from  '../actions/projectActions'
 
 class EditTaskForm extends Component {
   constructor(props) {
@@ -68,18 +69,26 @@ class EditTaskForm extends Component {
       } else {
         alert(editedTask.success);
         this.props.editTask(editedTask.updated_task);
+        this.props.updateProject(editedTask.updated_project)
         this.setState({
           title: editedTask.updated_task.title,
           description: editedTask.updated_task.description,
-          date: editedTask.updated_task.due_date,
+          date: this.reformatDateAppearance(editedTask.updated_task.due_date),
           percentage: editedTask.updated_task.percentage
         })
       }
     })
   }
 
+  reformatDateAppearance = (date) => {
+    const year = date.slice(0,4)
+    const month = date.slice(5,7)
+    const day = date.slice(8,10)
+    return `${month}/${day}/${year}`
+  }
+
   render() {
-    console.log("I AM IN THE EDIT TASK FORM", this.state)
+    // console.log("I AM IN THE EDIT TASK FORM", this.state)
     return (
       <form className="ui form" onSubmit={this.handleSubmit}>
         <div className="field">
@@ -140,7 +149,8 @@ class EditTaskForm extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    editTask: (updatedTask) => dispatch(editTask(updatedTask))
+    editTask: (updatedTask) => dispatch(editTask(updatedTask)),
+    updateProject: (updatedProject) => dispatch(updateProject(updatedProject))
   }
 }
 
