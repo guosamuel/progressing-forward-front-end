@@ -4,6 +4,7 @@ import Task from './Task'
 import { sanitizeDate } from '../helperFunctions/sanitizeDate'
 import { connect } from 'react-redux'
 import NewTaskForm from './NewTaskForm'
+import FilteredMultiSelect from 'react-filtered-multiselect'
 
 class Project extends Component {
   constructor(props) {
@@ -11,13 +12,35 @@ class Project extends Component {
 
     const projectLead = this.props.allUsers.find( user => user.id === this.props.project.project_lead_id)
     const collaborators = this.props.project.users.filter( user => user.id !== projectLead.id )
+    // debugger
+    const currentCollaboratorsAndProjectLead = [...collaborators, projectLead]
+    console.log("CURRENT COLLABORATORS AND PROJECT LEAD", currentCollaboratorsAndProjectLead)
+    // map( user => ({value: user.id, name: `${user.first_name} ${user.last_name}`}))
+    const potentialCollaborators = []
+
+    this.props.allUsers.forEach ( potentialCollaborator => {
+
+      const collaboratorExist = currentCollaboratorsAndProjectLead.find( collaborator => {
+          // debugger
+          return collaborator.id === potentialCollaborator.id })
+
+      const collaboratorAlreadyIncluded = potentialCollaborators.find( collaborator => {
+        return collaborator.id === potentialCollaborator.id
+      })
+
+      if (!collaboratorExist && !collaboratorAlreadyIncluded) {
+        potentialCollaborators.push(potentialCollaborator)
+      }
+    })
 
     this.state = {
       tasksShown: false,
       taskFormShown: false,
       moreCollaboratorsShown: false,
       collaborators: collaborators,
-      projectLead: projectLead
+      projectLead: projectLead,
+      selectedCollaborators: [],
+      potentialCollaborators: potentialCollaborators
     }
 
   }
@@ -47,6 +70,18 @@ class Project extends Component {
   //   return projectLead
   // }
 
+  handleDeselectCollaborator = (index) => {
+    //makes a copy of the state
+    const selectedCollaborators = this.state.selectedCollaborators.slice()
+    //returns the options that were spliced
+    selectedCollaborators.splice(index, 1)
+    this.setState({selectedCollaborators: selectedCollaborators})
+  }
+
+  handleSelectionChangeCollaborator = (selectedCollaborators) => {
+    this.setState({selectedCollaborators: selectedCollaborators})
+  }
+
   render() {
     // console.log("IM IN THE PROJECT COMPONENT", this.props)
     const filteredTasks = this.props.allTasks.filter( task => task.project_id === this.props.project.id)
@@ -63,6 +98,10 @@ class Project extends Component {
         </div>
       )
     })
+
+
+
+    console.log(this.props.project.title, this.state.potentialCollaborators)
 
     return (
       <div className="ui middle celled relaxed aligned divided list">
@@ -90,6 +129,9 @@ class Project extends Component {
                 { this.state.moreCollaboratorsShown ? <i className="down chevron icon"></i> : <i className="right chevron icon"></i> }
               Add Collaborator(s)
               </button>
+            </div>
+            <div>
+
             </div>
             <div className="ui list">
               { renderCollaborators }
