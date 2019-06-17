@@ -10,20 +10,6 @@ class Project extends Component {
   constructor(props) {
     super(props)
 
-
-    this.state = {
-      tasksShown: false,
-      taskFormShown: false,
-      moreCollaboratorsShown: false,
-      collaborators: [],
-      projectLead: null,
-      selectedCollaborators: [],
-      potentialCollaborators: []
-    }
-
-  }
-
-  componentDidMount() {
     //** ONLY THE PROJECT LEAD HAS THE RELATIONAL ATTRIBUTES ASSOCIATED WITH IT. THE COLLABORATORS DO NOT HAVE THE RELATIONAL ATTRIBUTES
     const projectLead = this.props.allUsers.find( user => user.id === this.props.project.project_lead_id)
     // debugger
@@ -31,7 +17,7 @@ class Project extends Component {
     // map( user => ({value: user.id, name: `${user.first_name} ${user.last_name}`}))
     const potentialCollaborators = []
     const collaborators = this.props.project.users.filter( user => user.id !== projectLead.id )
-    // debugger
+
     const currentCollaboratorsAndProjectLead = [...collaborators, projectLead]
 
     this.props.allUsers.forEach ( potentialCollaborator => {
@@ -47,12 +33,27 @@ class Project extends Component {
           potentialCollaborators.push(potentialCollaborator)
         }
       })
-    this.setState({
+
+    this.state = {
+      tasksShown: false,
+      taskFormShown: false,
+      moreCollaboratorsShown: false,
       collaborators: collaborators,
       projectLead: projectLead,
+      selectedCollaborators: [],
       potentialCollaborators: potentialCollaborators
-    })
+    }
+
   }
+
+  // componentDidMount() {
+  //
+  //   this.setState({
+  //     collaborators: collaborators,
+  //     projectLead: projectLead,
+  //     potentialCollaborators: potentialCollaborators
+  //   })
+  // }
 
   displayTasks = () => {
     this.setState({tasksShown: !this.state.tasksShown})
@@ -118,7 +119,7 @@ class Project extends Component {
   }
 
   render() {
-    console.log(this.props)
+    console.log(this.props.project.title, "COLLABORATORS ARE", this.state.collaborators)
     const filteredTasks = this.props.allTasks.filter( task => task.project_id === this.props.project.id)
     const renderTasks = filteredTasks.map( task => <Task task={task} key={task.id} projectDueDate={this.props.project.due_date}/> )
     // const projectLead = this.props.allUsers.find( user => user.id === this.props.project.project_lead_id)
@@ -143,11 +144,13 @@ class Project extends Component {
     return (
       <div className="ui middle celled relaxed aligned divided list">
         <div className="item project">
+
           <div className="right floated content">
             <button className="compact ui icon button" onClick={this.displayTasks}>
               {this.state.tasksShown ? <i className="down chevron icon"></i> : <i className="right chevron icon"></i> }
             </button>
           </div>
+
           <div className="content project">
             {this.props.project.title}
             <br/>
@@ -164,12 +167,18 @@ class Project extends Component {
             <div className="ui list">
               { renderCollaborators }
             </div>
+            <br />
+            { this.state.projectLead && this.props.current_user.id === this.state.projectLead.id ?
             <div>
               <button className="compact ui icon button" onClick={this.displayMoreCollaborators}>
-                { this.state.moreCollaboratorsShown ? <i className="down chevron icon"></i> : <i className="right chevron icon"></i> }
+                {this.state.moreCollaboratorsShown ?
+                  <i className="down chevron icon"></i> :
+                  <i className="right chevron icon"></i>
+                }
               Add Collaborator(s)
               </button>
-            </div>
+            </div> : null
+            }
             { this.state.moreCollaboratorsShown ? <div className="ui grid">
               <div className="eight wide column">
                 <FilteredMultiSelect
@@ -212,20 +221,28 @@ class Project extends Component {
           <div>
             <Progress value={this.props.project.percentage} total='100' progress='percent' indicating />
           </div>
-            { this.state.tasksShown ?
-            <div>
-            <button className="compact ui icon button" onClick={this.displayTaskForm}>
-              { this.state.taskFormShown ? <i className="down chevron icon"></i> : <i className="right chevron icon"></i> }
-            Create New Task
-            </button>
-            <br/>
-            <br/>
-            <div>
-              {this.state.taskFormShown ? <NewTaskForm projectId={this.props.project.id} projectDueDate={this.props.project.due_date}/> : null}
-            </div>
-            <div>{ renderTasks }</div>
-            </div>
-            :null }
+
+              { this.state.tasksShown ?
+              <div>
+                { this.state.projectLead && this.props.current_user.id === this.state.projectLead.id ?
+                <div>
+                  <button className="compact ui icon button" onClick={this.displayTaskForm}>
+                    { this.state.taskFormShown ? <i className="down chevron icon"></i> : <i className="right chevron icon"></i> }
+                  Create New Task
+                  </button>
+                </div>
+                :
+                null  }
+                <br />
+                <div>
+                  {this.state.taskFormShown ? <NewTaskForm projectId={this.props.project.id} projectDueDate={this.props.project.due_date}/> : null}
+                </div>
+                <div>
+                  { renderTasks }
+                </div>
+              </div>
+              :null }
+
         </div>
       </div>
     )
