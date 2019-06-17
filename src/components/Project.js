@@ -85,7 +85,7 @@ class Project extends Component {
   }
 
   handleAddingSelectedCollaborators = () => {
-    // console.log("THESE ARE THE SELECTED COLLABORATORS", this.state.selectedCollaborators)
+    console.log("THESE ARE THE SELECTED vera", this.state.selectedCollaborators)
     fetch(`http://localhost:3000/api/v1/user_projects`, {
       method: "POST",
       headers: {
@@ -114,7 +114,7 @@ class Project extends Component {
         selectedCollaborators: [],
         collaborators: [...this.state.collaborators, ...data.added_collaborators],
         potentialCollaborators: updatedPotentialCollaborators
-      })
+      }, () => console.log(this.state))
     })
   }
 
