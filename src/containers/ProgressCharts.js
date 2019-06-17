@@ -32,14 +32,14 @@ class ProgressCharts extends Component {
 
   render() {
     return (
-      <div className="ui four column doubling stackable grid container">
-        <div className="column" id="ToDoProjectsContainer">
+      <div className="ui grid">
+        <div className="four wide column" id="ToDoProjectsContainer">
           <ToDoProjectsContainer />
         </div>
-        <div className="column" id="InProgressProjectsContainer">
+        <div className="four wide column" id="InProgressProjectsContainer">
           <InProgressProjectsContainer />
         </div>
-        <div className="column" id="CompletedProjectsContainer">
+        <div className="four wide column" id="CompletedProjectsContainer">
           <CompletedProjectsContainer />
         </div>
       </div>

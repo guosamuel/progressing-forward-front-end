@@ -10,48 +10,49 @@ class Project extends Component {
   constructor(props) {
     super(props)
 
-    const projectLead = this.props.allUsers.find( user => user.id === this.props.project.project_lead_id)
-    const collaborators = this.props.project.users.filter( user => user.id !== projectLead.id )
-    // debugger
-    const currentCollaboratorsAndProjectLead = [...collaborators, projectLead]
-    console.log("CURRENT COLLABORATORS AND PROJECT LEAD", currentCollaboratorsAndProjectLead)
-    // map( user => ({value: user.id, name: `${user.first_name} ${user.last_name}`}))
-    const potentialCollaborators = []
-
-    this.props.allUsers.forEach ( potentialCollaborator => {
-
-      const collaboratorExist = currentCollaboratorsAndProjectLead.find( collaborator => {
-          // debugger
-          return collaborator.id === potentialCollaborator.id })
-
-      const collaboratorAlreadyIncluded = potentialCollaborators.find( collaborator => {
-        return collaborator.id === potentialCollaborator.id
-      })
-
-      if (!collaboratorExist && !collaboratorAlreadyIncluded) {
-        potentialCollaborators.push(potentialCollaborator)
-      }
-    })
 
     this.state = {
       tasksShown: false,
       taskFormShown: false,
       moreCollaboratorsShown: false,
-      collaborators: collaborators,
-      projectLead: projectLead,
+      collaborators: [],
+      projectLead: null,
       selectedCollaborators: [],
-      potentialCollaborators: potentialCollaborators
+      potentialCollaborators: []
     }
 
   }
 
-  // componentDidMount() {
-  //   debugger
-  //   this.setState({
-  //     projectLead: projectLead,
-  //     collaborators: [...collaborators]
-  //   })
-  // }
+  componentDidMount() {
+    //** ONLY THE PROJECT LEAD HAS THE RELATIONAL ATTRIBUTES ASSOCIATED WITH IT. THE COLLABORATORS DO NOT HAVE THE RELATIONAL ATTRIBUTES
+    const projectLead = this.props.allUsers.find( user => user.id === this.props.project.project_lead_id)
+    // debugger
+    // console.log("CURRENT COLLABORATORS AND PROJECT LEAD", currentCollaboratorsAndProjectLead)
+    // map( user => ({value: user.id, name: `${user.first_name} ${user.last_name}`}))
+    const potentialCollaborators = []
+    const collaborators = this.props.project.users.filter( user => user.id !== projectLead.id )
+    // debugger
+    const currentCollaboratorsAndProjectLead = [...collaborators, projectLead]
+
+    this.props.allUsers.forEach ( potentialCollaborator => {
+      const collaboratorExist = currentCollaboratorsAndProjectLead.find( collaborator => {
+        // debugger
+        return collaborator.id === potentialCollaborator.id })
+
+        const collaboratorAlreadyIncluded = potentialCollaborators.find( collaborator => {
+          return collaborator.id === potentialCollaborator.id
+        })
+
+        if (!collaboratorExist && !collaboratorAlreadyIncluded) {
+          potentialCollaborators.push(potentialCollaborator)
+        }
+      })
+    this.setState({
+      collaborators: collaborators,
+      projectLead: projectLead,
+      potentialCollaborators: potentialCollaborators
+    })
+  }
 
   displayTasks = () => {
     this.setState({tasksShown: !this.state.tasksShown})
@@ -82,8 +83,42 @@ class Project extends Component {
     this.setState({selectedCollaborators: selectedCollaborators})
   }
 
+  handleAddingSelectedCollaborators = () => {
+    // console.log("THESE ARE THE SELECTED COLLABORATORS", this.state.selectedCollaborators)
+    fetch(`http://localhost:3000/api/v1/user_projects`, {
+      method: "POST",
+      headers: {
+        "Content-Type": 'application/json',
+        Accept: 'application/json'
+      },
+      body: JSON.stringify({
+        selectedCollaborators: this.state.selectedCollaborators,
+        projectId: this.props.project.id
+      })
+    })
+    .then(resp => resp.json())
+    .then(data => {
+      alert(data.success)
+
+      const updatedPotentialCollaborators = []
+
+      this.state.potentialCollaborators.forEach(potentialCollaborator => {
+        const toBeAdded = data.added_collaborators.find( added_collaborator => added_collaborator.id === potentialCollaborator.id)
+        if (!toBeAdded) {
+          updatedPotentialCollaborators.push(potentialCollaborator)
+        }
+      })
+
+      this.setState({
+        selectedCollaborators: [],
+        collaborators: [...this.state.collaborators, ...data.added_collaborators],
+        potentialCollaborators: updatedPotentialCollaborators
+      })
+    })
+  }
+
   render() {
-    // console.log("IM IN THE PROJECT COMPONENT", this.props)
+    console.log(this.props)
     const filteredTasks = this.props.allTasks.filter( task => task.project_id === this.props.project.id)
     const renderTasks = filteredTasks.map( task => <Task task={task} key={task.id} projectDueDate={this.props.project.due_date}/> )
     // const projectLead = this.props.allUsers.find( user => user.id === this.props.project.project_lead_id)
@@ -99,9 +134,11 @@ class Project extends Component {
       )
     })
 
+    const collaboratorOptions = this.state.potentialCollaborators.map( collaborator => ({value: collaborator.id, name: `${collaborator.first_name} ${collaborator.last_name}`}))
 
+    const selectedCollaborators = this.state.selectedCollaborators
 
-    console.log(this.props.project.title, this.state.potentialCollaborators)
+    // console.log("CURRENT COLLABORATORS", this.state.collaborators)
 
     return (
       <div className="ui middle celled relaxed aligned divided list">
@@ -124,19 +161,53 @@ class Project extends Component {
             Collaborators:
             <br />
             <br />
+            <div className="ui list">
+              { renderCollaborators }
+            </div>
             <div>
               <button className="compact ui icon button" onClick={this.displayMoreCollaborators}>
                 { this.state.moreCollaboratorsShown ? <i className="down chevron icon"></i> : <i className="right chevron icon"></i> }
               Add Collaborator(s)
               </button>
             </div>
-            <div>
-
+            { this.state.moreCollaboratorsShown ? <div className="ui grid">
+              <div className="eight wide column">
+                <FilteredMultiSelect
+                  onChange={this.handleSelectionChangeCollaborator}
+                  options={collaboratorOptions}
+                  selectedOptions={selectedCollaborators}
+                  textProp="name"
+                  valueProp="value"
+                  placeholder="Filter by name"
+                  size="5"
+                />
+              </div>
+              <br />
+              <div className="ui grid">
+                <div className="sixteen wide fluid column">
+                  {selectedCollaborators.length === 0 && <p>You have yet add an additional collaborator.</p>}
+                  {selectedCollaborators.length > 0 &&
+                  <ul>
+                    {selectedCollaborators.map( (option, idx) => <li key={option.value}>
+                      {`${option.name}`}
+                    <button type="button" onClick={ () => this.handleDeselectCollaborator(idx)}>
+                    &times;
+                    </button>
+                    </li>)}
+                    <br />
+                    <br />
+                    <button type="ui left floated button" onClick={this.handleAddingSelectedCollaborators}>
+                      Add Selected Collaborator(s)
+                    </button>
+                  </ul>
+                  }
+                </div>
+              </div>
             </div>
-            <div className="ui list">
-              { renderCollaborators }
-            </div>
+            : null
+            }
           </div>
+          <br />
           <br />
           <div>
             <Progress value={this.props.project.percentage} total='100' progress='percent' indicating />
