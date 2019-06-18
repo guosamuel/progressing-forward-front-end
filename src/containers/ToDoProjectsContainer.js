@@ -33,7 +33,7 @@ class ToDoProjectsContainer extends Component {
         </button> }
         <br/>
         <br/>
-        <div> {this.state.projectFormShown ? <NewProjectForm /> : null} </div>
+        <div> {this.state.projectFormShown ? <NewProjectForm hideNewProjectForm={this.handleClick}/> : null} </div>
         <br />
         <div>{renderToDoProjects}</div>
       </div>

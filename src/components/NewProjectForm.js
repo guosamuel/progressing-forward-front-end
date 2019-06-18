@@ -40,6 +40,7 @@ class NewProjectForm extends Component {
         alert(newProject.error)
       } else {
         this.props.addProject(newProject)
+        alert("Your new project was successfully added!")
       }
     })
     .then(this.setState({
@@ -47,12 +48,13 @@ class NewProjectForm extends Component {
       description: "",
       date: "",
     }))
+    .then(this.props.hideNewProjectForm)
   }
 
   render() {
     // console.log("I AM IN THE NEW PROJECT", this.props)
     return (
-      <form className="ui form" onSubmit={this.handleSubmit}>
+      <form className="ui form" onSubmit={this.handleSubmit} autoComplete="off">
         <div className="field">
           <label>Title</label>
           <input
@@ -88,7 +90,7 @@ class NewProjectForm extends Component {
           />
         </div>
         <br />
-        <button className="ui button" type="submit">Submit</button>
+        <button className="ui button" type="submit">Submit New Project Form</button>
       </form>
     )
   }

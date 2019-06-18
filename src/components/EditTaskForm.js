@@ -78,6 +78,7 @@ class EditTaskForm extends Component {
         })
       }
     })
+    .then(this.props.hideEditTaskForm)
   }
 
   reformatDateAppearance = (date) => {
@@ -90,7 +91,7 @@ class EditTaskForm extends Component {
   render() {
     // console.log("I AM IN THE EDIT TASK FORM", this.state)
     return (
-      <form className="ui form" onSubmit={this.handleSubmit}>
+      <form className="ui form" onSubmit={this.handleSubmit} autoComplete="off">
         <div className="field">
           <label>Update Progress</label>
             <div className="ui input">
@@ -141,7 +142,7 @@ class EditTaskForm extends Component {
           />
         </div>
         <br />
-        <button className="ui button" type="submit">Submit</button>
+        <button className="ui button" type="submit">Update Task: {this.props.task.title}</button>
       </form>
     )
   }

@@ -50,3 +50,40 @@ code {
 .verticallyCenter form {
   line-height: 1.5;
 }
+
+.FilteredMultiSelect__filter {
+  display: block;
+  width: 200%;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-image: none;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: .25rem
+}
+
+.FilteredMultiSelect__select {
+  display: block;
+  width: 200%;
+  padding: .375rem .75rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  color: #495057;
+  background-color: #fff;
+  background-image: none;
+  background-clip: padding-box;
+  border: 1px solid #ced4da;
+  border-radius: .25rem
+}
+
+.task {
+  max-width: 100%;
+  overflow: hidden
+}
+
+.ui.middle.celled.relaxed.aligned.divided.list.project {
+  border-bottom: 5px solid rgba(255,255,255,.9)
+}
