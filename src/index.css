@@ -24,12 +24,13 @@ code {
 
 #InProgressProjectsContainer {
   border: dashed;
-  background-color: #1A12FF
+  background-color: #22FF12
+
 }
 
 #CompletedProjectsContainer {
   border: dashed;
-  background-color: #22FF12
+  background-color: #1A12FF
 }
 
 .column {

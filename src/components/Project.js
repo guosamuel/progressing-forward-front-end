@@ -16,7 +16,7 @@ class Project extends Component {
     // console.log("CURRENT COLLABORATORS AND PROJECT LEAD", currentCollaboratorsAndProjectLead)
     // map( user => ({value: user.id, name: `${user.first_name} ${user.last_name}`}))
     const potentialCollaborators = []
-    const collaborators = this.props.project.users.filter( user => user.id !== projectLead.id )
+    const collaborators = this.props.project.users && projectLead ? this.props.project.users.filter( user => user.id !== projectLead.id ) : []
 
     const currentCollaboratorsAndProjectLead = [...collaborators, projectLead]
 
@@ -147,9 +147,7 @@ class Project extends Component {
         <div className="item project">
 
           <div className="right floated content">
-            <button className="compact ui icon button" onClick={this.displayTasks}>
-              {this.state.tasksShown ? <i className="down chevron icon"></i> : <i className="right chevron icon"></i> }
-            </button>
+
           </div>
 
           <div className="content project">
@@ -163,11 +161,19 @@ class Project extends Component {
             Project Due Date: {sanitizeDate(this.props.project.due_date)}
             <br />
             <br />
-            Collaborators:
+            Collaborator(s):
             <br />
             <br />
             <div className="ui list">
-              { renderCollaborators }
+
+              { this.state.collaborators.length === 0 ?
+                <div className="item">
+                  <i className="right triangle icon"></i>
+                  <div className="content">
+                    <div className="header">You currently do not have any collaborators on this project.</div>
+                  </div>
+                </div>
+                : renderCollaborators }
             </div>
             <br />
             { this.state.projectLead && this.props.current_user.id === this.state.projectLead.id ?
@@ -223,7 +229,17 @@ class Project extends Component {
           <div>
             <Progress value={this.props.project.percentage} total='100' progress='percent' indicating />
           </div>
-
+          {this.state.tasksShown ?
+            <button className="compact ui icon button" onClick={this.displayTasks}>
+              <i className="down chevron icon"></i>
+               Hide Project Task(s)
+            </button> :
+            <button className="compact ui icon button" onClick={this.displayTasks}>
+              <i className="right chevron icon"></i>
+              Show Project Task(s)
+            </button> }
+            <br />
+            <br />
               { this.state.tasksShown ?
               <div>
                 { this.state.projectLead && this.props.current_user.id === this.state.projectLead.id ?
