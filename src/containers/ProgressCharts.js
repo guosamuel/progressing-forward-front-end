@@ -19,7 +19,7 @@ class ProgressCharts extends Component {
       }
     })
       .then(resp => resp.json())
-      .then(projects => this.props.allProjects(projects))
+      .then(projects => {this.props.allProjects(projects)})
 
     fetch('http://localhost:3000/api/v1/tasks')
       .then(resp => resp.json())
@@ -32,7 +32,7 @@ class ProgressCharts extends Component {
 
   render() {
     return (
-      <div className="ui grid">
+      <div className="ui three column centered grid">
         <div className="four wide column" id="ToDoProjectsContainer">
           <ToDoProjectsContainer />
         </div>

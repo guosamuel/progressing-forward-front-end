@@ -11,7 +11,7 @@ class InProgressProjectsContainer extends Component {
     const renderInProgressProjects = inProgressProjects.map( project => <Project project={project} key={project.id}/>)
     return (
       <div>
-        <h1>IN PROGRESS:</h1>
+        <h1>IN PROGRESS PROJECTS:</h1>
         <div>{renderInProgressProjects}</div>
       </div>
     )

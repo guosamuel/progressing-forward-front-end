@@ -21,7 +21,7 @@ class ToDoProjectsContainer extends Component {
     const renderToDoProjects = toDoProjects.map( project => <Project project={project} key={project.id}/>)
     return (
       <div>
-        <h1>TO DO:</h1>
+        <h1>TO DO PROJECTS:</h1>
         <button className="compact ui icon button" onClick={this.handleClick}>
           {this.state.projectFormShown ? <i className="down chevron icon"></i> : <i className="right chevron icon"></i> }
           Create New Project
