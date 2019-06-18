@@ -33,13 +33,13 @@ class ProgressCharts extends Component {
   render() {
     return (
       <div className="ui three column centered grid">
-        <div className="four wide column" id="ToDoProjectsContainer">
+        <div className="five wide column" id="ToDoProjectsContainer">
           <ToDoProjectsContainer />
         </div>
-        <div className="four wide column" id="InProgressProjectsContainer">
+        <div className="five wide column" id="InProgressProjectsContainer">
           <InProgressProjectsContainer />
         </div>
-        <div className="four wide column" id="CompletedProjectsContainer">
+        <div className="five wide column" id="CompletedProjectsContainer">
           <CompletedProjectsContainer />
         </div>
       </div>

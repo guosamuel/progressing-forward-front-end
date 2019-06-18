@@ -22,10 +22,15 @@ class ToDoProjectsContainer extends Component {
     return (
       <div>
         <h1>TO DO PROJECTS:</h1>
+        {this.state.projectFormShown ?
         <button className="compact ui icon button" onClick={this.handleClick}>
-          {this.state.projectFormShown ? <i className="down chevron icon"></i> : <i className="right chevron icon"></i> }
-          Create New Project
-        </button>
+          <i className="down chevron icon"></i>
+            Hide New Project Form
+        </button> :
+        <button className="compact ui icon button" onClick={this.handleClick}>
+          <i className="right chevron icon"></i>
+            Show New Project Form
+        </button> }
         <br/>
         <br/>
         <div> {this.state.projectFormShown ? <NewProjectForm /> : null} </div>
