@@ -39,3 +39,13 @@ code {
   margin-left: 1%;
   margin-bottom: 1%;
 }
+
+.verticallyCenter {
+  top: 50%;
+  transform: translateY(50%);
+  /* border: dashed; */
+}
+
+.verticallyCenter form {
+  line-height: 1.5;
+}

@@ -26,7 +26,10 @@ class Task extends Component {
           <div className="content task">
             {this.props.task.title}
             <br/>
+            <div class="ui left aligned text fluid container">
             Description: {this.props.task.description}
+            </div>
+
             <br/>
             Task Due Date: {sanitizeDate(this.props.task.due_date)}
           </div>

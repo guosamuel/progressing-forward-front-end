@@ -46,6 +46,7 @@ class Project extends Component {
 
   }
 
+
   // componentDidMount() {
   //
   //   this.setState({
@@ -154,6 +155,7 @@ class Project extends Component {
           <div className="content project">
             {this.props.project.title}
             <br/>
+
             Description: {this.props.project.description}
             <br/>
             Project Lead: { this.state.projectLead ? `${this.state.projectLead.first_name} ${this.state.projectLead.last_name}` : "TBD" }

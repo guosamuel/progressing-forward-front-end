@@ -1,5 +1,7 @@
 export default (state = {projects: []}, action) => {
   switch (action.type) {
+    case "LOGOUT":
+      return {projects: []}
     case "ALLPROJECTS":
       return {
         ...state,

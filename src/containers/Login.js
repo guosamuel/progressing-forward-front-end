@@ -55,8 +55,13 @@ class Login extends Component {
     // console.log("THE PROPS IN LOGIN PAGE ARE", this.props)
     // console.log(this.state)
     return(
-      <div>
-          { this.state.invalid ? <div className="ui red message">Invalid Username or Password</div> : null}
+      <div className="ui one column centered grid verticallyCenter">
+          { this.state.invalid ?
+          <div className="row">
+              <div className="ui red message">
+                Invalid Username or Password
+              </div>
+          </div> : null}
           <form className="ui form" onSubmit={this.handleSubmit}>
             <div className="field">
               <label>Username</label>

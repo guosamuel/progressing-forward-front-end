@@ -1,5 +1,7 @@
 export default (state = {tasks: []}, action) => {
   switch (action.type) {
+    case "LOGOUT":
+      return {tasks: []}
     case "ALLTASKS":
       return {
         ...state,
