@@ -16,19 +16,12 @@ class Task extends Component {
 
   render() {
     return (
-      <div className="ui middle celled relaxed aligned divided list">
+      <div className="ui middle celled relaxed aligned divided list task">
         <div className="item task">
-          <div className="right floated content">
-            <button className="compact ui icon button" onClick={this.displayEditTasks}>
-              {this.state.editTaskFormShown ? <i className="down chevron icon"></i> : <i className="right chevron icon"></i> }
-            </button>
-          </div>
           <div className="content task">
-            {this.props.task.title}
+            Title: {this.props.task.title}
             <br/>
-            <div class="ui left aligned text fluid container">
             Description: {this.props.task.description}
-            </div>
 
             <br/>
             Task Due Date: {sanitizeDate(this.props.task.due_date)}
@@ -37,7 +30,18 @@ class Task extends Component {
             <Progress value={this.props.task.percentage} total='100' progress='percent' indicating />
           </div>
           <div>
-            {this.state.editTaskFormShown ? <EditTaskForm task={this.props.task} projectDueDate={this.props.projectDueDate}/> : null}
+          {this.state.editTaskFormShown ?
+            <button className="compact ui icon button" onClick={this.displayEditTasks}>
+              <i className="down chevron icon"></i>
+                Hide Edit Task Form: {this.props.task.title}
+            </button> :
+            <button className="compact ui icon button" onClick={this.displayEditTasks}>
+               <i className="right chevron icon"></i>
+                Hide Edit Task Form: {this.props.task.title}
+            </button> }
+          </div>
+          <div>
+            {this.state.editTaskFormShown ? <EditTaskForm task={this.props.task} projectDueDate={this.props.projectDueDate} hideEditTaskForm={this.displayEditTasks}/> : null}
           </div>
         </div>
       </div>

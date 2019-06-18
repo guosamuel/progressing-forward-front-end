@@ -40,6 +40,7 @@ class NewTaskForm extends Component {
       if (newTask.error) {
         alert(newTask.error)
       } else {
+        alert(`You sucessfully added your new task to Project: ${this.props.projectTitle}`)
         this.props.addTask(newTask.new_task)
         this.props.updateProject(newTask.updated_project)
       }
@@ -49,6 +50,7 @@ class NewTaskForm extends Component {
       description: "",
       date: "",
     }))
+    .then(this.props.hideNewTaskForm)
   }
 
   lastDate = () => {
@@ -65,7 +67,7 @@ class NewTaskForm extends Component {
   render() {
     // console.log("I AM IN THE NEW TASK", this.props)
     return (
-      <form className="ui form" onSubmit={this.handleSubmit}>
+      <form className="ui form" onSubmit={this.handleSubmit} autoComplete="off">
         <div className="field">
           <label>Title</label>
           <input
@@ -102,7 +104,7 @@ class NewTaskForm extends Component {
           />
         </div>
         <br />
-        <button className="ui button" type="submit">Submit</button>
+        <button className="ui button" type="submit">Submit New Task Form</button>
       </form>
     )
   }

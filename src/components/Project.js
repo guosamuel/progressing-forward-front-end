@@ -143,7 +143,7 @@ class Project extends Component {
     // console.log("CURRENT COLLABORATORS", this.state.collaborators)
 
     return (
-      <div className="ui middle celled relaxed aligned divided list">
+      <div className="ui middle celled relaxed aligned divided list project">
         <div className="item project">
 
           <div className="right floated content">
@@ -151,7 +151,7 @@ class Project extends Component {
           </div>
 
           <div className="content project">
-            {this.props.project.title}
+            Title: {this.props.project.title}
             <br/>
 
             Description: {this.props.project.description}
@@ -232,11 +232,11 @@ class Project extends Component {
           {this.state.tasksShown ?
             <button className="compact ui icon button" onClick={this.displayTasks}>
               <i className="down chevron icon"></i>
-               Hide Project Task(s)
+               Hide {this.props.project.title} Task(s)
             </button> :
             <button className="compact ui icon button" onClick={this.displayTasks}>
               <i className="right chevron icon"></i>
-              Show Project Task(s)
+              Show {this.props.project.title} Task(s)
             </button> }
             <br />
             <br />
@@ -244,16 +244,21 @@ class Project extends Component {
               <div>
                 { this.state.projectLead && this.props.current_user.id === this.state.projectLead.id ?
                 <div>
+                  { this.state.taskFormShown ?
                   <button className="compact ui icon button" onClick={this.displayTaskForm}>
-                    { this.state.taskFormShown ? <i className="down chevron icon"></i> : <i className="right chevron icon"></i> }
-                  Create New Task
-                  </button>
+                    <i className="down chevron icon"></i>
+                      Hide New Task Form
+                  </button> :
+                  <button className="compact ui icon button" onClick={this.displayTaskForm}>
+                    <i className="right chevron icon"></i>
+                      Show New Task Form
+                  </button> }
                 </div>
                 :
                 null  }
                 <br />
                 <div>
-                  {this.state.taskFormShown ? <NewTaskForm projectId={this.props.project.id} projectDueDate={this.props.project.due_date}/> : null}
+                  {this.state.taskFormShown ? <NewTaskForm projectId={this.props.project.id} projectDueDate={this.props.project.due_date} projectTitle={this.props.project.title} hideNewTaskForm={this.displayTaskForm}/> : null}
                 </div>
                 <div>
                   { renderTasks }
