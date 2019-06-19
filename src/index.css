@@ -25,7 +25,6 @@ code {
 #InProgressProjectsContainer {
   border: dashed;
   background-color: #22FF12
-
 }
 
 #CompletedProjectsContainer {
@@ -79,11 +78,51 @@ code {
   border-radius: .25rem
 }
 
-.task {
+.content.task {
   max-width: 100%;
   overflow: hidden
 }
 
 .ui.middle.celled.relaxed.aligned.divided.list.project {
-  border-bottom: 5px solid rgba(255,255,255,.9)
+  border: 5px solid rgba(255,255,255,.9);
+  margin-bottom: 3%
+}
+
+.ui.middle.celled.relaxed.aligned.divided.list.task {
+  border: 5px solid rgba(0,0,0,.9);
+  margin-bottom: 1%
+}
+
+.top.container.header {
+  margin-bottom: 16%
+}
+
+.collapsible {
+  background-color: #eee;
+  color: #444;
+  cursor: pointer;
+  padding: 10px;
+  width: 100%;
+  border: 1px solid;
+  text-align: left;
+  outline: none;
+  font-size: 15px;
+  margin-bottom: 5px
+}
+
+/* .active, .collapsible.button:hover {
+  background-color: #ccc;
+} */
+
+.collapsible-content {
+  padding: 0 18px;
+  overflow: hidden;
+  transition: 1s ease-out
+}
+
+.plus-or-minus {
+  color: black;
+  float: right;
+  font-size: 13px;
+  font-weight: 900
 }

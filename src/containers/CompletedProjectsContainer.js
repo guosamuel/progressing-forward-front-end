@@ -11,7 +11,7 @@ class CompletedProjectsContainer extends Component {
     const renderCompletedProjects = completedProjects.map( project => <Project project={project} key={project.id}/>)
     return (
       <div>
-        <h1>COMPLETED PROJECTS:</h1>
+        <h1 className="top container header">COMPLETED PROJECTS:</h1>
         <div>{renderCompletedProjects}</div>
       </div>
     )

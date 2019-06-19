@@ -19,7 +19,7 @@ class Task extends Component {
       <div className="ui middle celled relaxed aligned divided list task">
         <div className="item task">
           <div className="content task">
-            Title: {this.props.task.title}
+            Task Title: {this.props.task.title}
             <br/>
             Description: {this.props.task.description}
 
@@ -37,9 +37,10 @@ class Task extends Component {
             </button> :
             <button className="compact ui icon button" onClick={this.displayEditTasks}>
                <i className="right chevron icon"></i>
-                Hide Edit Task Form: {this.props.task.title}
+                Show Edit Task Form: {this.props.task.title}
             </button> }
           </div>
+          <br />
           <div>
             {this.state.editTaskFormShown ? <EditTaskForm task={this.props.task} projectDueDate={this.props.projectDueDate} hideEditTaskForm={this.displayEditTasks}/> : null}
           </div>
