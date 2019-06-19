@@ -93,7 +93,7 @@ class EditTaskForm extends Component {
     return (
       <form className="ui form" onSubmit={this.handleSubmit} autoComplete="off">
         <div className="field">
-          <label>Update Progress</label>
+          <label>Update Task Total Progress Precentage</label>
             <div className="ui input">
               <input
                 type="number"

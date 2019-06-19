@@ -117,14 +117,61 @@ code {
   overflow: hidden
 }
 
-.ui.middle.celled.relaxed.aligned.divided.list.project {
-  border: 5px solid rgba(255,255,255,.9);
-  margin-bottom: 3%
+#ToDoProjectsContainer .ui.middle.celled.relaxed.aligned.divided.list.project {
+  /* border: 5px solid rgba(255,255,255,.9); */
+  margin-bottom: 3%;
+  background-image: none;
+  background-clip: padding-box;
+  border: 3px solid black;
+  border-radius: 1rem;
+  background-color: white;
+  color: black
 }
 
-.ui.middle.celled.relaxed.aligned.divided.list.task {
-  border: 5px solid rgba(0,0,0,.9);
-  margin-bottom: 1%
+#ToDoProjectsContainer .ui.middle.celled.relaxed.aligned.divided.list.task {
+  border: 3px solid black;
+  border-radius: 1rem;
+  color: black;
+  margin-bottom: 5%;
+  background-color: #a51077b5
+}
+
+#InProgressProjectsContainer .ui.middle.celled.relaxed.aligned.divided.list.project {
+  /* border: 5px solid rgba(255,255,255,.9); */
+  margin-bottom: 3%;
+  background-image: none;
+  background-clip: padding-box;
+  border: 3px solid #b3049ee3;
+  border-radius: 1rem;
+  background-color: white;
+  color: black
+}
+
+#InProgressProjectsContainer .ui.middle.celled.relaxed.aligned.divided.list.task {
+  border: 3px solid #b3049ee3;
+  border-radius: 1rem;
+  color: black;
+  margin-bottom: 5%;
+  background-color: #acd7e6;
+}
+
+#CompletedProjectsContainer .ui.middle.celled.relaxed.aligned.divided.list.project {
+  /* border: 5px solid rgba(255,255,255,.9); */
+  margin-bottom: 3%;
+  background-image: none;
+  background-clip: padding-box;
+  border: 3px solid #ef6837;
+  border-radius: 1rem;
+  background-color: white;
+  color: black
+}
+
+#CompletedProjectsContainer .ui.middle.celled.relaxed.aligned.divided.list.task {
+  border: 3px solid #ef6837;
+  border-radius: 1rem;
+  color: black;
+  margin-bottom: 5%;
+  background-color: #fff7007a;
 }
 
 .top.container.header {
@@ -164,4 +211,8 @@ code {
 .compact.ui.icon.button.hidden {
   opacity: 0;
   cursor: default;
+}
+
+.ui.active.indicating.progress {
+  border: 1px solid black
 }
