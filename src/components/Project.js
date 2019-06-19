@@ -37,6 +37,7 @@ class Project extends Component {
     this.state = {
       tasksShown: false,
       taskFormShown: false,
+      projectContentShown: false,
       moreCollaboratorsShown: false,
       collaborators: collaborators,
       projectLead: projectLead,
@@ -83,6 +84,10 @@ class Project extends Component {
 
   handleSelectionChangeCollaborator = (selectedCollaborators) => {
     this.setState({selectedCollaborators: selectedCollaborators})
+  }
+
+  handleDisplayProjectContent = () => {
+    this.setState({projectContentShown: !this.state.projectContentShown})
   }
 
   handleAddingSelectedCollaborators = () => {
@@ -143,130 +148,160 @@ class Project extends Component {
     // console.log("CURRENT COLLABORATORS", this.state.collaborators)
 
     return (
-      <div className="ui middle celled relaxed aligned divided list project">
-        <div className="item project">
+      <div>
+        <button className="collapsible" onClick={this.handleDisplayProjectContent}>
+          {this.props.project.title}{ this.state.projectContentShown ? <span className="plus-or-minus"> - </span> : <span className="plus-or-minus"> + </span> }
+        </button>
+          { this.state.projectContentShown ?
+          <div className="collapsible-content">
+            <div className="ui middle celled relaxed aligned divided list project">
+              <div className="item project">
 
-          <div className="right floated content">
 
-          </div>
+                <div className="content project">
+                  Project Title: {this.props.project.title}
+                  <br/>
 
-          <div className="content project">
-            Title: {this.props.project.title}
-            <br/>
+                  Description: {this.props.project.description}
+                  <br/>
+                  Project Lead: { this.state.projectLead ? `${this.state.projectLead.first_name} ${this.state.projectLead.last_name}` : "TBD" }
+                  <br />
+                  Project Due Date: {sanitizeDate(this.props.project.due_date)}
+                  <br />
+                  <br />
+                  Collaborator(s):
+                  <br />
+                  <br />
+                  <div className="ui list">
 
-            Description: {this.props.project.description}
-            <br/>
-            Project Lead: { this.state.projectLead ? `${this.state.projectLead.first_name} ${this.state.projectLead.last_name}` : "TBD" }
-            <br />
-            Project Due Date: {sanitizeDate(this.props.project.due_date)}
-            <br />
-            <br />
-            Collaborator(s):
-            <br />
-            <br />
-            <div className="ui list">
-
-              { this.state.collaborators.length === 0 ?
-                <div className="item">
-                  <i className="right triangle icon"></i>
-                  <div className="content">
-                    <div className="header">You currently do not have any collaborators on this project.</div>
+                    { this.state.collaborators.length === 0 ?
+                      <div className="item">
+                        <i className="right triangle icon"></i>
+                        <div className="content">
+                          <div className="header">You currently do not have any collaborators on this project.</div>
+                        </div>
+                      </div>
+                      : renderCollaborators }
                   </div>
-                </div>
-                : renderCollaborators }
-            </div>
-            <br />
-            { this.state.projectLead && this.props.current_user.id === this.state.projectLead.id ?
-            <div>
-              <button className="compact ui icon button" onClick={this.displayMoreCollaborators}>
-                {this.state.moreCollaboratorsShown ?
-                  <i className="down chevron icon"></i> :
-                  <i className="right chevron icon"></i>
-                }
-              Add Collaborator(s)
-              </button>
-            </div> : null
-            }
-            { this.state.moreCollaboratorsShown ? <div className="ui grid">
-              <div className="eight wide column">
-                <FilteredMultiSelect
-                  onChange={this.handleSelectionChangeCollaborator}
-                  options={collaboratorOptions}
-                  selectedOptions={selectedCollaborators}
-                  textProp="name"
-                  valueProp="value"
-                  placeholder="Filter by name"
-                  size="5"
-                />
-              </div>
-              <br />
-              <div className="ui grid">
-                <div className="sixteen wide fluid column">
-                  {selectedCollaborators.length === 0 && <p>You have yet add an additional collaborator.</p>}
-                  {selectedCollaborators.length > 0 &&
-                  <ul>
-                    {selectedCollaborators.map( (option, idx) => <li key={option.value}>
-                      {`${option.name}`}
-                    <button type="button" onClick={ () => this.handleDeselectCollaborator(idx)}>
-                    &times;
+                  <br />
+                  { this.state.projectLead && this.props.current_user.id === this.state.projectLead.id ?
+                  <div>
+                    <button className="compact ui icon button" onClick={this.displayMoreCollaborators}>
+                      {this.state.moreCollaboratorsShown ?
+                        <i className="down chevron icon"></i> :
+                        <i className="right chevron icon"></i>
+                      }
+                    Add Collaborator(s)
                     </button>
-                    </li>)}
+                  </div> : null
+                  }
+                  { this.state.moreCollaboratorsShown ? <div className="ui grid">
+                    <div className="eight wide column">
+                      <FilteredMultiSelect
+                        onChange={this.handleSelectionChangeCollaborator}
+                        options={collaboratorOptions}
+                        selectedOptions={selectedCollaborators}
+                        textProp="name"
+                        valueProp="value"
+                        placeholder="Filter by name"
+                        size="5"
+                      />
+                    </div>
                     <br />
-                    <br />
-                    <button type="ui left floated button" onClick={this.handleAddingSelectedCollaborators}>
-                      Add Selected Collaborator(s)
-                    </button>
-                  </ul>
+                    <div className="ui grid">
+                      <div className="sixteen wide fluid column">
+                        {selectedCollaborators.length === 0 && <p>You have yet to add an additional collaborator.</p>}
+                        {selectedCollaborators.length > 0 &&
+                          <div>
+                            <p>You have selected the following collaborator(s):</p>
+                            <div className="ui list">
+                            {selectedCollaborators.map( (option, idx) => {
+                              return (
+                                <div className="item">
+                                  <i className="right triangle icon"></i>
+                                  <div className="content">
+                                    <div className="header">{option.name}
+                                      <div className="right floated content">
+                                        <button type="ui button" onClick={ () => this.handleDeselectCollaborator(idx)}>
+                                          &times;
+                                        </button>
+                                      </div>
+                                    </div>
+                                  </div>
+                                </div>
+                              )
+                            })}
+                            </div>
+                          </div>
+                        }
+                          <br />
+                          <br />
+                          <button type="ui left floated button" onClick={this.handleAddingSelectedCollaborators}>
+                            Add Selected Collaborator(s)
+                          </button>
+
+
+                      </div>
+                    </div>
+                  </div>
+                  : null
                   }
                 </div>
-              </div>
-            </div>
-            : null
-            }
-          </div>
-          <br />
-          <br />
-          <div>
-            <Progress value={this.props.project.percentage} total='100' progress='percent' indicating />
-          </div>
-          {this.state.tasksShown ?
-            <button className="compact ui icon button" onClick={this.displayTasks}>
-              <i className="down chevron icon"></i>
-               Hide {this.props.project.title} Task(s)
-            </button> :
-            <button className="compact ui icon button" onClick={this.displayTasks}>
-              <i className="right chevron icon"></i>
-              Show {this.props.project.title} Task(s)
-            </button> }
-            <br />
-            <br />
-              { this.state.tasksShown ?
-              <div>
-                { this.state.projectLead && this.props.current_user.id === this.state.projectLead.id ?
-                <div>
-                  { this.state.taskFormShown ?
-                  <button className="compact ui icon button" onClick={this.displayTaskForm}>
-                    <i className="down chevron icon"></i>
-                      Hide New Task Form
-                  </button> :
-                  <button className="compact ui icon button" onClick={this.displayTaskForm}>
-                    <i className="right chevron icon"></i>
-                      Show New Task Form
-                  </button> }
-                </div>
-                :
-                null  }
+                <br />
                 <br />
                 <div>
-                  {this.state.taskFormShown ? <NewTaskForm projectId={this.props.project.id} projectDueDate={this.props.project.due_date} projectTitle={this.props.project.title} hideNewTaskForm={this.displayTaskForm}/> : null}
+                  <Progress value={this.props.project.percentage} total='100' progress='percent' indicating />
                 </div>
-                <div>
-                  { renderTasks }
-                </div>
-              </div>
-              :null }
+                {this.state.tasksShown ?
+                  <button className="compact ui icon button" onClick={this.displayTasks}>
+                    <i className="down chevron icon"></i>
+                     Hide {this.props.project.title} Task(s)
+                  </button> :
+                  <button className="compact ui icon button" onClick={this.displayTasks}>
+                    <i className="right chevron icon"></i>
+                    Show {this.props.project.title} Task(s)
+                  </button> }
+                  <br />
+                  <br />
+                    { this.state.tasksShown ?
+                    <div>
+                      { this.state.projectLead && this.props.current_user.id === this.state.projectLead.id ?
+                      <div>
+                        { this.state.taskFormShown ?
+                        <button className="compact ui icon button" onClick={this.displayTaskForm}>
+                          <i className="down chevron icon"></i>
+                            Hide New Task Form
+                        </button> :
+                        <button className="compact ui icon button" onClick={this.displayTaskForm}>
+                          <i className="right chevron icon"></i>
+                            Show New Task Form
+                        </button> }
+                      </div>
+                      :
+                      null  }
+                      <br />
+                      <div>
+                        {this.state.taskFormShown ? <NewTaskForm projectId={this.props.project.id} projectDueDate={this.props.project.due_date} projectTitle={this.props.project.title} hideNewTaskForm={this.displayTaskForm}/> : null}
+                      </div>
+                      <div className="ui list">
+                        { renderTasks.length === 0 ?
+                          <div className="item">
+                            <i className="right triangle icon"></i>
+                            <div className="content">
+                              <div className="header">You currently do not have any tasks for this project.</div>
+                            </div>
+                          </div>
+                          : null }
+                      </div>
+                      <div>
+                        { renderTasks }
+                      </div>
+                    </div>
+                    :null }
 
-        </div>
+              </div>
+            </div>
+          </div> : null }
       </div>
     )
   }
