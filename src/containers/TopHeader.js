@@ -19,7 +19,7 @@ class TopHeader extends Component {
         { !!this.props.current_user ?
           <div>
             <h2> Welcome {this.props.current_user.first_name} {this.props.current_user.last_name}
-            <button className="ui button" type="Logout" onClick={this.handleLogOut}>Log Out</button>
+            <button className="compact ui button logout" type="Logout" onClick={this.handleLogOut}>Log Out</button>
             </h2>
           </div>
           : null
