@@ -26,6 +26,8 @@ class Task extends Component {
             <br/>
             Task Due Date: {sanitizeDate(this.props.task.due_date)}
           </div>
+          <br />
+          Current Task Percentage:
           <div>
             <Progress value={this.props.task.percentage} total='100' progress='percent' indicating />
           </div>

@@ -139,7 +139,7 @@ class Project extends Component {
         <div className="item">
           <i className="right triangle icon"></i>
           <div className="content">
-            <div className="header">{collaborator.first_name} {collaborator.last_name}</div>
+            <div className="header collaborators">{collaborator.first_name} {collaborator.last_name}</div>
           </div>
         </div>
       )
@@ -252,6 +252,7 @@ class Project extends Component {
                 </div>
                 <br />
                 <br />
+                Current Project Percentage:
                 <div>
                   <Progress value={this.props.project.percentage} total='100' progress='percent' indicating />
                 </div>
