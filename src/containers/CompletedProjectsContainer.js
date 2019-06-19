@@ -12,6 +12,13 @@ class CompletedProjectsContainer extends Component {
     return (
       <div>
         <h1 className="top container header">COMPLETED PROJECTS:</h1>
+        <button className="compact ui icon button hidden">
+          <i className="down chevron icon"></i>
+            IM SUPPOSED TO BE HIDDEN
+        </button>
+        <br />
+        <br />
+        <br />
         <div>{renderCompletedProjects}</div>
       </div>
     )

@@ -91,37 +91,41 @@ class Project extends Component {
   }
 
   handleAddingSelectedCollaborators = () => {
-    console.log("THESE ARE THE SELECTED vera", this.state.selectedCollaborators)
-    fetch(`http://localhost:3000/api/v1/user_projects`, {
-      method: "POST",
-      headers: {
-        "Content-Type": 'application/json',
-        Accept: 'application/json'
-      },
-      body: JSON.stringify({
-        selectedCollaborators: this.state.selectedCollaborators,
-        projectId: this.props.project.id
+    if (this.state.selectedCollaborators.length === 0) {
+      alert("You have not selected a colloborator to add to your project.")
+    } else {
+    // console.log("THESE ARE THE SELECTED vera", this.state.selectedCollaborators)
+      fetch(`http://localhost:3000/api/v1/user_projects`, {
+        method: "POST",
+        headers: {
+          "Content-Type": 'application/json',
+          Accept: 'application/json'
+        },
+        body: JSON.stringify({
+          selectedCollaborators: this.state.selectedCollaborators,
+          projectId: this.props.project.id
+        })
       })
-    })
-    .then(resp => resp.json())
-    .then(data => {
-      alert(data.success)
+      .then(resp => resp.json())
+      .then(data => {
+        alert(data.success)
 
-      const updatedPotentialCollaborators = []
+        const updatedPotentialCollaborators = []
 
-      this.state.potentialCollaborators.forEach(potentialCollaborator => {
-        const toBeAdded = data.added_collaborators.find( added_collaborator => added_collaborator.id === potentialCollaborator.id)
-        if (!toBeAdded) {
-          updatedPotentialCollaborators.push(potentialCollaborator)
-        }
+        this.state.potentialCollaborators.forEach(potentialCollaborator => {
+          const toBeAdded = data.added_collaborators.find( added_collaborator => added_collaborator.id === potentialCollaborator.id)
+          if (!toBeAdded) {
+            updatedPotentialCollaborators.push(potentialCollaborator)
+          }
+        })
+
+        this.setState({
+          selectedCollaborators: [],
+          collaborators: [...this.state.collaborators, ...data.added_collaborators],
+          potentialCollaborators: updatedPotentialCollaborators
+        }, () => console.log(this.state))
       })
-
-      this.setState({
-        selectedCollaborators: [],
-        collaborators: [...this.state.collaborators, ...data.added_collaborators],
-        potentialCollaborators: updatedPotentialCollaborators
-      }, () => console.log(this.state))
-    })
+    }
   }
 
   render() {
@@ -236,11 +240,10 @@ class Project extends Component {
                         }
                           <br />
                           <br />
-                          <button type="ui left floated button" onClick={this.handleAddingSelectedCollaborators}>
-                            Add Selected Collaborator(s)
+                          <button className="compact ui icon button" onClick={this.handleAddingSelectedCollaborators}>
+                              <i className="user icon"></i>
+                          Add Collaborator(s)
                           </button>
-
-
                       </div>
                     </div>
                   </div>
