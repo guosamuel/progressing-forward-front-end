@@ -101,6 +101,7 @@ class NewTaskForm extends Component {
             dateFormat="MM/DD/YYYY"
             minDate={new Date()}
             maxDate={this.lastDate()}
+            closable={true}
           />
         </div>
         <br />

@@ -87,6 +87,7 @@ class NewProjectForm extends Component {
             type="text"
             dateFormat="MM/DD/YYYY"
             minDate={new Date()}
+            closable={true}
           />
         </div>
         <br />

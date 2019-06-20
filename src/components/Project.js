@@ -5,13 +5,15 @@ import { sanitizeDate } from '../helperFunctions/sanitizeDate'
 import { connect } from 'react-redux'
 import NewTaskForm from './NewTaskForm'
 import FilteredMultiSelect from 'react-filtered-multiselect'
+import EditProjectForm from './EditProjectForm'
 
 class Project extends Component {
   constructor(props) {
     super(props)
 
-    //** ONLY THE PROJECT LEAD HAS THE RELATIONAL ATTRIBUTES ASSOCIATED WITH IT. THE COLLABORATORS DO NOT HAVE THE RELATIONAL ATTRIBUTES
     const projectLead = this.props.allUsers.find( user => user.id === this.props.project.project_lead_id)
+    console.log(this.props.allUsers)
+    //** ONLY THE PROJECT LEAD HAS THE RELATIONAL ATTRIBUTES ASSOCIATED WITH IT. THE COLLABORATORS DO NOT HAVE THE RELATIONAL ATTRIBUTES
     // debugger
     // console.log("CURRENT COLLABORATORS AND PROJECT LEAD", currentCollaboratorsAndProjectLead)
     // map( user => ({value: user.id, name: `${user.first_name} ${user.last_name}`}))
@@ -39,6 +41,7 @@ class Project extends Component {
       taskFormShown: false,
       projectContentShown: false,
       moreCollaboratorsShown: false,
+      editProjectFormShown: false,
       collaborators: collaborators,
       projectLead: projectLead,
       selectedCollaborators: [],
@@ -47,7 +50,10 @@ class Project extends Component {
 
   }
 
-
+  // componentDidMount() {
+  //   const projectLead = this.props.allUsers.find( user => user.id === this.props.project.project_lead_id)
+  //   console.log("stuff i need", projectLead)
+  // }
   // componentDidMount() {
   //
   //   this.setState({
@@ -90,6 +96,10 @@ class Project extends Component {
     this.setState({projectContentShown: !this.state.projectContentShown})
   }
 
+  displayEditProject = () => {
+    this.setState({editProjectFormShown: !this.state.editProjectFormShown})
+  }
+
   handleAddingSelectedCollaborators = () => {
     if (this.state.selectedCollaborators.length === 0) {
       alert("You have not selected a colloborator to add to your project.")
@@ -128,8 +138,11 @@ class Project extends Component {
     }
   }
 
+  findProjectLead = () => {
+    this.setState({projectLead: this.props.allUsers.find( user => user.id === this.props.project.project_lead_id)})
+  }
+
   render() {
-    console.log(this.props.project.title, "COLLABORATORS ARE", this.state.collaborators)
     const filteredTasks = this.props.allTasks.filter( task => task.project_id === this.props.project.id)
     const renderTasks = filteredTasks.map( task => <Task task={task} key={task.id} projectDueDate={this.props.project.due_date}/> )
     // const projectLead = this.props.allUsers.find( user => user.id === this.props.project.project_lead_id)
@@ -168,7 +181,7 @@ class Project extends Component {
 
                   Description: {this.props.project.description}
                   <br/>
-                  Project Lead: { this.state.projectLead ? `${this.state.projectLead.first_name} ${this.state.projectLead.last_name}` : "TBD" }
+                  Project Lead: { this.state.projectLead ? `${this.state.projectLead.first_name} ${this.state.projectLead.last_name}` : this.findProjectLead() }
                   <br />
                   Project Due Date: {sanitizeDate(this.props.project.due_date)}
                   <br />
@@ -256,6 +269,25 @@ class Project extends Component {
                 <div>
                   <Progress value={this.props.project.percentage} total='100' progress='percent' indicating />
                 </div>
+
+                <div>
+                {this.state.editProjectFormShown ?
+                  <button className="compact ui icon button" onClick={this.displayEditProject}>
+                    <i className="down chevron icon"></i>
+                      Hide Edit Project Form: {this.props.project.title}
+                  </button> :
+                  <button className="compact ui icon button" onClick={this.displayEditProject}>
+                     <i className="right chevron icon"></i>
+                      Show Edit Project Form: {this.props.project.title}
+                  </button> }
+                </div>
+                <br />
+
+                <div>
+                  {this.state.editProjectFormShown ? <EditProjectForm project={this.props.project} hideEditProjectForm={this.displayEditProject}/> : null}
+                </div>
+                <br />
+
                 {this.state.tasksShown ?
                   <button className="compact ui icon button" onClick={this.displayTasks}>
                     <i className="down chevron icon"></i>
