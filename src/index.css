@@ -63,9 +63,15 @@ code {
   margin-bottom: 1%;
 }
 
-.verticallyCenter {
+.verticallyCenterLogIn {
   top: 50%;
   transform: translateY(50%);
+  /* border: dashed; */
+}
+
+.verticallyCenterSignUp {
+  top: 50%;
+  transform: translateY(20%);
   /* border: dashed; */
 }
 
@@ -83,7 +89,7 @@ code {
   background-color: #fff;
   background-image: none;
   background-clip: padding-box;
-  border: 1px solid #ced4da;
+  border: 1px solid rgba(0,0,0,1);
   border-radius: .25rem
 }
 
@@ -93,21 +99,21 @@ code {
   padding: .375rem .75rem;
   font-size: 1rem;
   line-height: 1.5;
-  color: #495057;
+  color: black;
   background-color: #fff;
   background-image: none;
   background-clip: padding-box;
-  border: 1px solid #ced4da;
+  border: 1px solid rgba(0,0,0,1);
   border-radius: .25rem
 }
 
 .FilteredMultiSelect__button {
   width: 200%;
-  color: #495057;
-  background-color: #fff;
+  color: rgba(255,255,255,1);
+  background-color: #007bff;
   background-image: none;
   background-clip: padding-box;
-  border: 1px solid #ced4da;
+  border: 1px solid rgba(0,0,0,1);
   border-radius: .25rem
 }
 
@@ -219,4 +225,12 @@ code {
 .compact.ui.button.logout {
   margin-left: 2%;
   transform: scale(1.2, 1.2)
+}
+
+.ui.error.message {
+  text-align: left;
+}
+
+.ui.success.message {
+  text-align: left;
 }

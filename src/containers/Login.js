@@ -1,13 +1,15 @@
 import React, { Component } from 'react'
 import { connect } from 'react-redux'
 import { login } from '../actions/userActions'
+import SignUpForm from '../components/SignUpForm'
 
 class Login extends Component {
 
   state = {
     username: "",
     password: "",
-    invalid: false
+    invalid: false,
+    signUpShown: false
   }
 
   handleChange = (e) => {
@@ -51,32 +53,42 @@ class Login extends Component {
     })
   }
 
+  handleSignUpForm = () => {
+    this.setState({signUpShown: !this.state.signUpShown})
+  }
+
   render(){
     // console.log("THE PROPS IN LOGIN PAGE ARE", this.props)
     // console.log(this.state)
     return(
-      <div className="ui one column centered grid verticallyCenter">
-          { this.state.invalid ?
-          <div className="row">
-              <div className="ui red message">
-                Invalid Username or Password
+      <div>
+      { !this.state.signUpShown ?
+        <div className="ui one column centered grid verticallyCenterLogIn">
+            { this.state.invalid ?
+            <div className="row">
+                <div className="ui red message">
+                  Invalid Username or Password
+                </div>
+            </div> : null}
+            <form className="ui form" onSubmit={this.handleSubmit}>
+              <div className="field">
+                <label>Username</label>
+                <input type="text" name="username" placeholder="Username" onChange={this.handleChange} value={this.state.username}/>
               </div>
-          </div> : null}
-          <form className="ui form" onSubmit={this.handleSubmit}>
-            <div className="field">
-              <label>Username</label>
-              <input type="text" name="username" placeholder="Username" onChange={this.handleChange} value={this.state.username}/>
+              <div className="field">
+                <label>Password</label>
+                <input type="password" name="password" placeholder="Password" onChange={this.handleChange} value={this.state.password}/>
+              </div>
+              <br />
+              <button className="ui button" type="Login">Log In</button>
+            </form>
+            <div className="row">
+              <button className="ui button" onClick={this.handleSignUpForm}>Sign Up</button>
             </div>
-            <br />
-            <div className="field">
-              <label>Password</label>
-              <input type="password" name="password" placeholder="Password" onChange={this.handleChange} value={this.state.password}/>
-            </div>
-            <br />
-            <button className="ui button" type="Login">Log In</button>
-          </form>
+        </div> : <SignUpForm handleSignUpForm={this.handleSignUpForm}/> }
       </div>
     )
+
   }
 }
 
