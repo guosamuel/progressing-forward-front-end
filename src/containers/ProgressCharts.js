@@ -19,7 +19,10 @@ class ProgressCharts extends Component {
       }
     })
       .then(resp => resp.json())
-      .then(projects => {this.props.allProjects(projects)})
+      .then(projects => {
+        console.log('herrrrreeeee', projects);
+        this.props.allProjects(projects)
+      })
 
     fetch('http://localhost:3000/api/v1/tasks')
       .then(resp => resp.json())
@@ -27,7 +30,10 @@ class ProgressCharts extends Component {
 
     fetch('http://localhost:3000/api/v1/users')
       .then(resp => resp.json())
-      .then(users => this.props.allUsers(users))
+      .then(users => {
+        console.log('allll users', users);
+        this.props.allUsers(users)
+      })
   }
 
   render() {

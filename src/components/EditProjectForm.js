@@ -1,10 +1,9 @@
 import React, { Component } from 'react'
 import { DateInput } from 'semantic-ui-calendar-react'
 import { connect } from 'react-redux'
-import { editTask } from '../actions/taskActions'
 import { updateProject } from  '../actions/projectActions'
 
-class EditTaskForm extends Component {
+class EditProjectForm extends Component {
   constructor(props) {
     super(props);
 
@@ -16,22 +15,16 @@ class EditTaskForm extends Component {
     }
 
     this.state = {
-      title: this.props.task.title,
-      description: this.props.task.description,
-      date: this.reformatDateAppearance(this.props.task.due_date),
-      task_id: this.props.task.id,
-      percentage: this.props.task.percentage
+      title: this.props.project.title,
+      description: this.props.project.description,
+      date: this.reformatDateAppearance(this.props.project.due_date),
+      project_id: this.props.project.id,
     }
 
   }
 
   handleChange = (event) => {
-    if (event.target.name === "percentage") {
-      this.setState({[event.target.name]: parseInt(event.target.value, 10)})
-    }
-    else {
-      this.setState({[event.target.name]: event.target.value})
-    }
+    this.setState({[event.target.name]: event.target.value})
   }
 
   handleDateChange = (event, {name, value}) => {
@@ -41,20 +34,21 @@ class EditTaskForm extends Component {
     this.setState({[name]: value})
   }
 
-  lastDate = () => {
-    // console.log("PROJECT DUE DATE IS", this.props.projectDueDate)
-    const lastDate = this.props.projectDueDate
-    const year = lastDate.slice(0,4)
-    //** NEED THE MINUS 1 BECAUSE JANUARY STARTS AT 00
-    const month = lastDate.slice(5,7) - 1
-    const day = lastDate.slice(8,10)
-    const maxDate = new Date(year, month, day, 23, 59, 59)
-    return maxDate
-  }
+  // lastDate = () => {
+  //   // console.log("PROJECT DUE DATE IS", this.props.projectDueDate)
+  //   const lastDate = this.props.projectDueDate
+  //   const year = lastDate.slice(0,4)
+  //   //** NEED THE MINUS 1 BECAUSE JANUARY STARTS AT 00
+  //   const month = lastDate.slice(5,7) - 1
+  //   const day = lastDate.slice(8,10)
+  //   const maxDate = new Date(year, month, day, 23, 59, 59)
+  //   return maxDate
+  // }
 
   handleSubmit = (event) => {
     event.preventDefault()
-    fetch(`http://localhost:3000/api/v1/tasks/${this.state.task_id}`, {
+    // console.log("I AM IN THE EDIT PROJECT FORM")
+    fetch(`http://localhost:3000/api/v1/projects/${this.state.project_id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": 'application/json',
@@ -63,22 +57,20 @@ class EditTaskForm extends Component {
       body: JSON.stringify(this.state)
     })
     .then(resp => resp.json())
-    .then(editedTask => {
-      if (editedTask.error) {
-        alert(editedTask.error)
+    .then(editedProject => {
+      if (editedProject.error) {
+        alert(editedProject.error)
       } else {
-        alert(editedTask.success);
-        this.props.editTask(editedTask.updated_task);
-        this.props.updateProject(editedTask.updated_project)
+        alert(editedProject.success);
+        this.props.updateProject(editedProject.updated_project)
         this.setState({
-          title: editedTask.updated_task.title,
-          description: editedTask.updated_task.description,
-          date: this.reformatDateAppearance(editedTask.updated_task.due_date),
-          percentage: editedTask.updated_task.percentage
+          title: editedProject.updated_project.title,
+          description: editedProject.updated_project.description,
+          date: this.reformatDateAppearance(editedProject.updated_project.due_date),
         })
       }
     })
-    .then(this.props.hideEditTaskForm)
+    .then(this.props.hideEditProjectForm)
   }
 
   reformatDateAppearance = (date) => {
@@ -92,20 +84,6 @@ class EditTaskForm extends Component {
     // console.log("I AM IN THE EDIT TASK FORM", this.state)
     return (
       <form className="ui form" onSubmit={this.handleSubmit} autoComplete="off">
-        <div className="field">
-          <label>Update Task Total Progress Precentage</label>
-            <div className="ui input">
-              <input
-                type="number"
-                min="0"
-                max="100"
-                step="1"
-                onChange={this.handleChange}
-                name="percentage"
-                value={this.state.percentage}
-              />
-            </div>
-        </div>
         <div className="field">
           <label>Title</label>
           <input
@@ -138,12 +116,11 @@ class EditTaskForm extends Component {
             type="text"
             dateFormat="MM/DD/YYYY"
             minDate={new Date()}
-            maxDate={this.lastDate()}
             closable={true}
           />
         </div>
         <br />
-        <button className="ui button" type="submit">Update Task: {this.props.task.title}</button>
+        <button className="ui button" type="submit">Update Project: {this.props.project.title}</button>
       </form>
     )
   }
@@ -151,9 +128,8 @@ class EditTaskForm extends Component {
 
 const mapDispatchToProps = dispatch => {
   return {
-    editTask: (updatedTask) => dispatch(editTask(updatedTask)),
     updateProject: (updatedProject) => dispatch(updateProject(updatedProject))
   }
 }
 
-export default connect(null, mapDispatchToProps)(EditTaskForm)
+export default connect(null, mapDispatchToProps)(EditProjectForm)
