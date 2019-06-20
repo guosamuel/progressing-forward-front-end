@@ -223,8 +223,8 @@ code {
 }
 
 .compact.ui.button.logout {
-  margin-left: 2%;
-  transform: scale(1.2, 1.2)
+  margin-left: 0%;
+  transform: translate(0px, -4px) scale(0.70, 0.70);
 }
 
 .ui.error.message {

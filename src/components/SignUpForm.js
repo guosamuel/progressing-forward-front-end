@@ -1,4 +1,6 @@
 import React, { Component } from 'react'
+import { connect } from 'react-redux'
+import { addUser } from '../actions/userActions'
 
 class SignUpForm extends Component {
 
@@ -41,6 +43,7 @@ class SignUpForm extends Component {
         })
       }
       else {
+        this.props.addUser(data)
         this.setState({
           successfulSignUp: true,
           failedSignUp: false,
@@ -52,7 +55,6 @@ class SignUpForm extends Component {
         })
       }
     })
-    .then
   }
 
   render(){
@@ -110,5 +112,10 @@ class SignUpForm extends Component {
   }
 }
 
+const mapDispatchToProps = dispatch => {
+  return {
+    addUser: (user) => dispatch(addUser(user))
+  }
+}
 
-export default SignUpForm
+export default connect(null, mapDispatchToProps)(SignUpForm)

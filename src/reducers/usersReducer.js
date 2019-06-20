@@ -15,6 +15,11 @@ export default (state = {current_user: null, users: []}, action) => {
         ...state,
         users: action.payload
       }
+    case "ADDUSER":
+      return {
+        ...state,
+        users: [...state.users, action.payload]
+      }
     default:
       return state
   }
