@@ -270,23 +270,28 @@ class Project extends Component {
                   <Progress value={this.props.project.percentage} total='100' progress='percent' indicating />
                 </div>
 
+                { this.state.projectLead && this.state.projectLead.id === this.props.current_user.id ?
                 <div>
-                {this.state.editProjectFormShown ?
-                  <button className="compact ui icon button" onClick={this.displayEditProject}>
-                    <i className="down chevron icon"></i>
-                      Hide Edit Project Form: {this.props.project.title}
-                  </button> :
-                  <button className="compact ui icon button" onClick={this.displayEditProject}>
-                     <i className="right chevron icon"></i>
-                      Show Edit Project Form: {this.props.project.title}
-                  </button> }
-                </div>
-                <br />
+                  <div>
+                  {this.state.editProjectFormShown ?
+                    <button className="compact ui icon button" onClick={this.displayEditProject}>
+                      <i className="down chevron icon"></i>
+                        Hide Edit Project Form: {this.props.project.title}
+                    </button> :
+                    <button className="compact ui icon button" onClick={this.displayEditProject}>
+                       <i className="right chevron icon"></i>
+                        Show Edit Project Form: {this.props.project.title}
+                    </button> }
+                  </div>
+                  <br />
 
-                <div>
-                  {this.state.editProjectFormShown ? <EditProjectForm project={this.props.project} hideEditProjectForm={this.displayEditProject}/> : null}
+                  <div>
+                    {this.state.editProjectFormShown ? <EditProjectForm project={this.props.project} hideEditProjectForm={this.displayEditProject}/> : null}
+                  </div>
+                  <br />
                 </div>
-                <br />
+                :
+                null }
 
                 {this.state.tasksShown ?
                   <button className="compact ui icon button" onClick={this.displayTasks}>
