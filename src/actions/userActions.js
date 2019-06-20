@@ -17,3 +17,10 @@ export const allUsers = (users) => {
     payload: users
   }
 }
+
+export const addUser = (user) => {
+  return {
+    type: "ADDUSER",
+    payload: user
+  }
+}
