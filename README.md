@@ -1,68 +1,37 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+Progressing Forward
+========================
 
-## Available Scripts
+Welcome to Progressing Forward! This is the front-end portion of this application.
 
-In the project directory, you can run:
+## Description
+Progressing Forward is a project-task tracking application for all projects that includes the logged in user. In order to make progress on a project, the user must update the project's respective task(s). The project lead has the authority to create new tasks for their respective projects as needed. This application was inspired by my experience in one of my previous jobs. There was always confusion as to which individual was involved in which project. With my new found knowledge of React and Ruby on Rails, I created this application to consolidate all users involved in their respective projects.
 
-### `npm start`
+## Framework
+Built with [React](https://reactjs.org/)
 
-Runs the app in the development mode.<br>
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+## Features
+***Note:*** These are features of the overall application (i.e., front-end and back-end)
 
-The page will reload if you make edits.<br>
-You will also see any lint errors in the console.
+Collaborators - The project lead can add other users who are not already included in the project. When that user logs into their account, the project will be shown on the page.
 
-### `npm test`
+Auto Progress - The overall progress of the project is automatically updated after updating a task. The task can also regress.
 
-Launches the test runner in the interactive watch mode.<br>
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+Interactive Feedback - Messages will appear on the page if the actions the user performed were successful or not.
 
-### `npm run build`
+Task Due Dates - The due date for each task can not be due later than its respective project due date.
 
-Builds the app for production to the `build` folder.<br>
-It correctly bundles React in production mode and optimizes the build for the best performance.
+Auto Filter - The project will be automatically rendered into the appropriate column depending on the project's progress.
 
-The build is minified and the filenames include the hashes.<br>
-Your app is ready to be deployed!
+## Installation
+1. Install the [Progressing Forward Back-End](https://github.com/guosamuel/progressing-forward-back-end) server. Instructions will be in the repository's ReadMe. 
+2. Fork and clone this repository into your local computer.
+3. Navigate to the directory where it was cloned and run the following command: `npm install` (This may take a few minutes.)
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+## How To Use
+1. Before starting the front-end, ensure that the back-end server is running on port 3000.
+2. To run the back-front end, run the following command: `npm start`
+3. The first page should look like the following picture below: 
 
-### `npm run eject`
 
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
 
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
 
-Instead, it will copy all the configuration files and the transitive dependencies (Webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `npm run build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
