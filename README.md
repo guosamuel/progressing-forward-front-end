@@ -32,6 +32,5 @@ Auto Filter - The project will be automatically rendered into the appropriate co
 2. To run the back-front end, run the following command: `npm start`
 3. The first page should look like the following picture below: 
 
-
-
+![Log In Page](https://github.com/guosamuel/progressing-forward-front-end/blob/master/READMEphotos/Log%20In%20Page.png)
 
