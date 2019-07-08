@@ -37,6 +37,7 @@ Auto Filter - The project will be automatically rendered into the appropriate co
 4. You can either sign up as a new user or log in as an existing user. For demostration purposes, you can log in with the following account:
 
 Username: ***Guest***
+
 Password: ***123***
 
 Once you log in, the page should now look like the following picture below:
