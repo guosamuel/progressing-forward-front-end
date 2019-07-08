@@ -126,6 +126,16 @@ By using the same procedure, the project can be automatically filtered into the 
 
 ***Note: When editing a task, you may also regress the task's percentage. This may automatically filter the project back into the "TO DO PROJECTS" or "IN PROGRESS PROJECTS" column.***
 
-
 ##### Creating a New Project
 
+To create a new project, click on the "Show New Project Form" button in the "TO DO PROJECTS' column and the form displays as shown below: 
+
+![New Project Form Shown](https://github.com/guosamuel/progressing-forward-front-end/blob/master/READMEphotos/14.%20New%20Project%20Form%20Shown.png)
+
+After filling out all of the information, click on the "Submit New Project Form" button to submit the new information. An alert will appear to let you know the status of the submission. If it did not submit successfully, please follow the instructions on the alert for a proper submission.
+
+Upon successful submission of a new project, the new project will be appended at the top of the current projects. The following picture below describes said action:
+
+![New Project Shown](https://github.com/guosamuel/progressing-forward-front-end/blob/master/READMEphotos/15.%20New%20Project%20Shown.png)
+
+By default, a new project will not have any collaborators or tasks and the starting precentage will always be zero. Please refer to the approprirate sections when adding new collaborator(s) or task(s) as needed.
