@@ -50,7 +50,7 @@ To display the information of a project, click on its respective project button.
 
 ***Note: The picture already has some information populated from seed data. When a new project is created, it will look slightly different.***
 
-Every project will have three buttons. These are "Add Collaborator(s)", "Show Edit Project Form: _Name of the Project_", and "Show _Name of the Project_ Task(s)".
+Every project will have three buttons. These are "Add Collaborator(s)", "Show Edit Project Form: _Project Name_", and "Show _Project Name_ Task(s)".
 
 #### Add Collaborator(s)
 
@@ -68,4 +68,12 @@ Pressing the "X" button to the right of the collaborator's name will remove it f
 
 ![Successfully Added Collaborators](https://github.com/guosamuel/progressing-forward-front-end/blob/master/READMEphotos/6.%20Successfully%20Added%20Collaborators.png)
 
-#### Show Edit Project Form: _Name of the Project_
+#### Show Edit Project Form: _Project Name_
+
+When you click on the "Show Edit Project Form: _Project Name_" button, it should look like the following picture below: 
+
+![Edit Project Form Shown](https://github.com/guosamuel/progressing-forward-front-end/blob/master/READMEphotos/7.%20Edit%20Project%20Form%20Shown.png)
+
+After you have made your changes, click on the "Update Project: _Project Name_" to submit the updated information. An alert will appear to let you know the status of the update. If it did not update successfully, please follow the instructions on the alert for a proper submission.
+
+#### Show _Project Name_ Task(s)
