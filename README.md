@@ -125,3 +125,7 @@ After updating the new task, the project percentage will also be automatically u
 By using the same procedure, the project can be automatically filtered into the "COMPLETED PROJECTS" when all of its respective tasks are at 100%.
 
 ***Note: When editing a task, you may also regress the task's percentage. This may automatically filter the project back into the "TO DO PROJECTS" or "IN PROGRESS PROJECTS" column.***
+
+
+##### Creating a New Project
+
