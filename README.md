@@ -139,3 +139,7 @@ Upon successful submission of a new project, the new project will be appended at
 ![New Project Shown](https://github.com/guosamuel/progressing-forward-front-end/blob/master/READMEphotos/15.%20New%20Project%20Shown.png)
 
 By default, a new project will not have any collaborators or tasks and the starting precentage will always be zero. Please refer to the approprirate sections when adding new collaborator(s) or task(s), as needed.
+
+## Credits
+
+Credits to the Flatiron School instructors, software engineering coaches, and my cohort for supporting and teaching me every step of the way. This project is a cumulation of the support and knowlege that I gained during my time in Flatiron School.
