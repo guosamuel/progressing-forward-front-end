@@ -34,3 +34,14 @@ Auto Filter - The project will be automatically rendered into the appropriate co
 
 ![Log In Page](https://github.com/guosamuel/progressing-forward-front-end/blob/master/READMEphotos/Log%20In%20Page.png)
 
+4. You can either sign up as a new user or log in as an existing user. For demostration purposes, you can log in with the following account:
+
+Username: ***Guest***
+
+Password: ***123***
+
+Once you log in, the page should now look like the following picture below:
+
+![Main Page](https://github.com/guosamuel/progressing-forward-front-end/blob/master/READMEphotos/Main20Page.png)
+
+
