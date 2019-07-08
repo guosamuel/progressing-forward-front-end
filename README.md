@@ -32,7 +32,7 @@ Auto Filter - The project will be automatically rendered into the appropriate co
 2. To run the back-front end, run the following command: `npm start`
 3. The first page should look like the following picture below: 
 
-![Log In Page](https://github.com/guosamuel/progressing-forward-front-end/blob/master/READMEphotos/Log%20In%20Page.png)
+![Log In Page](https://github.com/guosamuel/progressing-forward-front-end/blob/master/READMEphotos/1.%20Log%20In%20Page.png)
 
 4. You can either sign up as a new user or log in as an existing user. For demostration purposes, you can log in with the following account:
 
@@ -42,6 +42,30 @@ Password: ***123***
 
 Once you log in, the page should now look like the following picture below:
 
-![Main Page](https://github.com/guosamuel/progressing-forward-front-end/blob/master/READMEphotos/Main20Page.png)
+![Main Page](https://github.com/guosamuel/progressing-forward-front-end/blob/master/READMEphotos/2.%20Main%20Page.png)
 
+To display the information of a project, click on its respective project button. The following picture below is an example of how a displayed project should look like.
 
+![Project Shown](https://github.com/guosamuel/progressing-forward-front-end/blob/master/READMEphotos/3.%20Project%20Shown.png)
+
+***Note: The picture already has some information populated from seed data. When a new project is created, it will look slightly different.***
+
+Every project will have three buttons. These are "Add Collaborator(s)", "Show Edit Project Form: _Name of the Project_", and "Show _Name of the Project_ Task(s)".
+
+#### Add Collaborator(s)
+
+When you click on the "Add Collaborator(s)" button, it should look like the following picture below: 
+
+![Adding Collaborators Shown](https://github.com/guosamuel/progressing-forward-front-end/blob/master/READMEphotos/4.%20Adding%20Collaborators%20Shown.png)
+
+The list of collaborators is all of the existing users that are not currently involved in that project. Collaborators can also be filtered by typing in the text above the list of names. To select collaborator(s), you can select multiple collaborators and then click on the "Select" button ***OR*** individually double click each individual collaborator.
+
+When all collaborators are selected, it should look like the following picture below:
+
+![Selected Collaborators](https://github.com/guosamuel/progressing-forward-front-end/blob/master/READMEphotos/5.%20Selected%20Collaborators.png)
+
+Pressing the "X" button to the right of the collaborator's name will remove it from the list. After double-checking the selected collaborators, you can add them by selecting the "Add Collaborator(s)" button. Then, the collaborator list will be hidden and the selected collaborators will be appended to the list of the current collaborators. The picture below demonstrates this action:
+
+![Successfully Added Collaborators](https://github.com/guosamuel/progressing-forward-front-end/blob/master/READMEphotos/6.%20Successfully%20Added%20Collaborators.png)
+
+#### Show Edit Project Form: _Name of the Project_
