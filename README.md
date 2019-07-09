@@ -140,6 +140,8 @@ Upon successful submission of a new project, the new project will be appended at
 
 By default, a new project will not have any collaborators or tasks and the starting precentage will always be zero. Please refer to the approprirate sections when adding new collaborator(s) or task(s), as needed.
 
+Also by default, the user who creates the project will automatically be assigned as the project lead.
+
 ## Credits
 
 Credits to the Flatiron School instructors, software engineering coaches, and my cohort for supporting and teaching me every step of the way. This project is a cumulation of the support and knowlege that I gained during my time in Flatiron School.
