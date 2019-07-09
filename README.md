@@ -29,7 +29,7 @@ Auto Filter - The project will be automatically rendered into the appropriate co
 
 ## How To Use
 1. Before starting the front-end, ensure that the back-end server is running on port 3000.
-2. To run the back-front end, run the following command: `npm start`
+2. To run the front-end, run the following command: `npm start`
 3. The first page should look like the following picture below: 
 
 ![Log In Page](https://github.com/guosamuel/progressing-forward-front-end/blob/master/READMEphotos/1.%20Log%20In%20Page.png)
