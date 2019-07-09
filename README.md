@@ -106,7 +106,7 @@ By clicking on the "Show Edit Task Form" button, the form for editing a task sha
 
 ![Edit Task Form Shown](https://github.com/guosamuel/progressing-forward-front-end/blob/master/READMEphotos/11.%20Edit%20Task%20Form%20Shown.png)
 
-All text fields will be auto-populated with its current text when the edit task form is shown.
+All text fields will be automatically populated with its current text when the edit task form is shown.
 
 ***_Editing the task via task percentage is how a project percentage changes. The project percentage is the average of all its respective task percentages._***
 
