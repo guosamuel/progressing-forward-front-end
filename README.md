@@ -60,7 +60,7 @@ When you click on the "Add Collaborator(s)" button, it should look like the foll
 
 ![Adding Collaborators Shown](https://github.com/guosamuel/progressing-forward-front-end/blob/master/READMEphotos/4.%20Adding%20Collaborators%20Shown.png)
 
-The list of collaborators is all of the existing users that are not currently involved in that project. Collaborators can also be filtered by typing in the text above the list of names. To select collaborator(s), you can select multiple collaborators and then click on the "Select" button ***OR*** individually double click each individual collaborator.
+The list of collaborators is all of the existing users that are not currently involved in that project. Collaborators can also be filtered by typing in the text field above the list of names. To select collaborator(s), you can select multiple collaborators and then click on the "Select" button ***OR*** individually double click each individual collaborator.
 
 When all collaborators are selected, it should look like the following picture below:
 
