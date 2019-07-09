@@ -128,7 +128,7 @@ By using the same procedure, the project can be automatically filtered into the 
 
 ##### Creating a New Project
 
-To create a new project, click on the "Show New Project Form" button in the "TO DO PROJECTS' column and the form displays as shown below: 
+To create a new project, click on the "Show New Project Form" button in the "TO DO PROJECTS" column and the form will display as shown below: 
 
 ![New Project Form Shown](https://github.com/guosamuel/progressing-forward-front-end/blob/master/READMEphotos/14.%20New%20Project%20Form%20Shown.png)
 
