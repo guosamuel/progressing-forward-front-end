@@ -22,7 +22,7 @@ class SignUpForm extends Component {
 
   handleSubmit = (e) => {
     e.preventDefault();
-    fetch('http://localhost:3000/api/v1/users', {
+    fetch('https://hidden-retreat-26970.herokuapp.com/api/v1/users', {
       method: 'POST',
       headers:{
         "Content-Type": 'application/json',

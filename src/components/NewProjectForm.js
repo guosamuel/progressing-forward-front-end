@@ -26,7 +26,7 @@ class NewProjectForm extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    fetch('http://localhost:3000/api/v1/projects', {
+    fetch('https://hidden-retreat-26970.herokuapp.com/api/v1/projects', {
       method: "POST",
       headers: {
         "Content-Type": 'application/json',

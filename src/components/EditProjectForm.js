@@ -48,7 +48,7 @@ class EditProjectForm extends Component {
   handleSubmit = (event) => {
     event.preventDefault()
     // console.log("I AM IN THE EDIT PROJECT FORM")
-    fetch(`http://localhost:3000/api/v1/projects/${this.state.project_id}`, {
+    fetch(`https://hidden-retreat-26970.herokuapp.com/api/v1/projects/${this.state.project_id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": 'application/json',

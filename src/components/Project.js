@@ -105,7 +105,7 @@ class Project extends Component {
       alert("You have not selected a colloborator to add to your project.")
     } else {
     // console.log("THESE ARE THE SELECTED vera", this.state.selectedCollaborators)
-      fetch(`http://localhost:3000/api/v1/user_projects`, {
+      fetch(`https://hidden-retreat-26970.herokuapp.com/api/v1/user_projects`, {
         method: "POST",
         headers: {
           "Content-Type": 'application/json',

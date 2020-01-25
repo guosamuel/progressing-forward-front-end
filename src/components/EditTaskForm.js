@@ -54,7 +54,7 @@ class EditTaskForm extends Component {
 
   handleSubmit = (event) => {
     event.preventDefault()
-    fetch(`http://localhost:3000/api/v1/tasks/${this.state.task_id}`, {
+    fetch(`https://hidden-retreat-26970.herokuapp.com/api/v1/tasks/${this.state.task_id}`, {
       method: "PATCH",
       headers: {
         "Content-Type": 'application/json',
