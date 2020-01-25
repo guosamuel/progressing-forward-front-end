@@ -16,7 +16,7 @@ class App extends Component {
     const token = localStorage.getItem("token")
 
     if (token) {
-      fetch("http://localhost:3000/api/v1/current_user", {
+      fetch("https://hidden-retreat-26970.herokuapp.com/api/v1/current_user", {
         headers: {
           Authorization: token
         }

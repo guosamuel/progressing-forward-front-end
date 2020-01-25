@@ -21,7 +21,7 @@ class Login extends Component {
   handleSubmit = (e) => {
     e.preventDefault();
     // console.log("SUBMITTED")
-    fetch('http://localhost:3000/api/v1/auth', {
+    fetch('https://hidden-retreat-26970.herokuapp.com/api/v1/auth', {
       method: 'POST',
       headers:{
         "Content-Type": 'application/json',

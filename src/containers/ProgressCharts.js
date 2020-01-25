@@ -13,7 +13,7 @@ class ProgressCharts extends Component {
 
     const token = localStorage.getItem('token')
 
-    fetch('http://localhost:3000/api/v1/projects', {
+    fetch('https://hidden-retreat-26970.herokuapp.com/api/v1/projects', {
       headers: {
         Authorization: `${token}`
       }
@@ -24,11 +24,11 @@ class ProgressCharts extends Component {
         this.props.allProjects(projects)
       })
 
-    fetch('http://localhost:3000/api/v1/tasks')
+    fetch('https://hidden-retreat-26970.herokuapp.com/api/v1/tasks')
       .then(resp => resp.json())
       .then(tasks => this.props.allTasks(tasks))
 
-    fetch('http://localhost:3000/api/v1/users')
+    fetch('https://hidden-retreat-26970.herokuapp.com/api/v1/users')
       .then(resp => resp.json())
       .then(users => {
         console.log('allll users', users);
