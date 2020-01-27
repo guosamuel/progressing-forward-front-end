@@ -20,7 +20,6 @@ class ProgressCharts extends Component {
     })
       .then(resp => resp.json())
       .then(projects => {
-        console.log('herrrrreeeee', projects);
         this.props.allProjects(projects)
       })
 
@@ -31,7 +30,6 @@ class ProgressCharts extends Component {
     fetch('https://hidden-retreat-26970.herokuapp.com/api/v1/users')
       .then(resp => resp.json())
       .then(users => {
-        console.log('allll users', users);
         this.props.allUsers(users)
       })
   }

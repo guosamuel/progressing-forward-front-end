@@ -12,7 +12,6 @@ class Project extends Component {
     super(props)
 
     const projectLead = this.props.allUsers.find( user => user.id === this.props.project.project_lead_id)
-    console.log(this.props.allUsers)
     //** ONLY THE PROJECT LEAD HAS THE RELATIONAL ATTRIBUTES ASSOCIATED WITH IT. THE COLLABORATORS DO NOT HAVE THE RELATIONAL ATTRIBUTES
     // debugger
     // console.log("CURRENT COLLABORATORS AND PROJECT LEAD", currentCollaboratorsAndProjectLead)
