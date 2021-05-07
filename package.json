@@ -5,7 +5,7 @@
   "dependencies": {
     "diff": ">=3.5.0",
     "eslint-utils": ">=1.4.1",
-    "handlebars": ">=4.3.0",
+    "handlebars": ">=4.7.7",
     "lodash": ">=4.17.19",
     "lodash.merge": ">=4.6.2",
     "lodash.template": ">=4.5.0",
